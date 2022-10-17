@@ -47,11 +47,16 @@ namespace ToolkitCore.Models
         }
     }
 
-    public abstract class PermissionsWrapper
+    public class PermissionsWrapper
     {
-        public abstract List<Permission> Permissions { get; }
+        public PermissionsWrapper()
+        {
 
-        public abstract string Namespace { get; }
+        }
+
+        public virtual List<Permission> Permissions { get; set; }
+
+        public virtual string Namespace { get; set; }
     }
 
     public class Permission
