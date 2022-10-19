@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using ToolkitCore.Models;
 using UnityEngine;
 using Verse;
 
@@ -12,27 +9,24 @@ namespace ToolkitCore.Database
     [StaticConstructorOnStartup]
     public static class DatabaseController
     {
-        static readonly string modFolder = "ToolkitCore";
-        public static readonly string dataPath = Application.persistentDataPath + $"/{modFolder}/";
+        private static readonly string modFolder = "ToolkitCore";
+        public static readonly string dataPath = Application.persistentDataPath + "/" + DatabaseController.modFolder + "/";
 
-        static DatabaseController()
-        {
-            Main();
-        }
+        static DatabaseController() => DatabaseController.Main();
 
-        static void Main()
+        private static void Main()
         {
-            if (!Directory.Exists(dataPath)) Directory.CreateDirectory(dataPath);
+            if (Directory.Exists(DatabaseController.dataPath))
+                return;
+            Directory.CreateDirectory(DatabaseController.dataPath);
         }
 
         public static void SaveToolkit()
         {
-            ViewerManager.SaveViewers();
         }
 
         public static void LoadToolkit()
         {
-
         }
 
         public static void SaveObject(object obj, string fileName, Mod mod)
@@ -40,36 +34,30 @@ namespace ToolkitCore.Database
             if (mod.Content.Name == null)
             {
                 Log.Error("Mod has no name");
-                return;
             }
-
-            fileName = $"{mod.Content.Name.Replace(" ", "")}_{fileName}.json";
-
-            string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-
-            SaveFile(json, fileName);
+            else
+            {
+                fileName = mod.Content.Name.Replace(" ", "") + "_" + fileName + ".json";
+                DatabaseController.SaveFile(JsonConvert.SerializeObject(obj, Formatting.Indented), fileName);
+            }
         }
 
         public static bool LoadObject<T>(string fileName, Mod mod, out T obj)
         {
-            obj = default;
-
+            obj = default(T);
             if (mod.Content.Name == null)
             {
                 Log.Error("Mod has no name");
                 return false;
             }
-
-            fileName = $"{mod.Content.Name.Replace(" ", "")}_{fileName}.json";
-
-            if (!LoadFile(fileName, out string json))
+            fileName = mod.Content.Name.Replace(" ", "") + "_" + fileName + ".json";
+            string json;
+            if (!DatabaseController.LoadFile(fileName, out json))
             {
-                Log.Warning($"Tried to load {fileName} but could not find file");
+                Log.Warning("Tried to load " + fileName + " but could not find file");
                 return false;
             }
-
             obj = JsonConvert.DeserializeObject<T>(json);
-
             return true;
         }
 
@@ -78,40 +66,33 @@ namespace ToolkitCore.Database
             Log.Message(json);
             try
             {
-                using (StreamWriter streamWriter = File.CreateText(Path.Combine(dataPath, fileName)))
-                {
-                    streamWriter.Write(json.ToString());
-                }
+                using (StreamWriter text = File.CreateText(Path.Combine(DatabaseController.dataPath, fileName)))
+                    text.Write(json.ToString());
             }
-            catch (IOException e)
+            catch (IOException ex)
             {
-                Log.Error(e.Message);
+                Log.Error(ex.Message);
                 return false;
             }
-
             return true;
         }
 
         public static bool LoadFile(string fileName, out string json)
         {
-            json = null;
-
-            var file = Path.Combine(dataPath, fileName);
-            if (!File.Exists(file)) return false;
-
+            json = (string)null;
+            string path = Path.Combine(DatabaseController.dataPath, fileName);
+            if (!File.Exists(path))
+                return false;
             try
             {
-                using (StreamReader streamReader = File.OpenText(file))
-                {
+                using (StreamReader streamReader = File.OpenText(path))
                     json = streamReader.ReadToEnd();
-                }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Log.Warning(e.Message);
+                Log.Warning(ex.Message);
                 return false;
             }
-
             return true;
         }
     }

@@ -1,30 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ToolkitCore.Controllers;
-using ToolkitCore.Interfaces;
 using ToolkitCore.Utilities;
 using TwitchLib.Client.Models;
-using Verse;
 
 namespace ToolkitCore.Models
 {
-    public static class MessageLogger
+    public static class MessageLog
     {
-        static readonly int LogLength = 20;
+        private static readonly int chatMessageQueueLength = 10;
+        private static readonly int whisperMessageQueueLength = 5;
 
-        public static List<IMessage> MessageLog { get; set; } = new List<IMessage>();
+        public static List<ChatMessage> LastChatMessages { get; } = new List<ChatMessage>(MessageLog.chatMessageQueueLength);
 
-        public static void LogMessage(IMessage message)
+        public static List<WhisperMessage> LastWhisperMessages { get; } = new List<WhisperMessage>(MessageLog.whisperMessageQueueLength);
+
+        public static void LogMessage(ChatMessage chatMessage)
         {
-            if (MessageLog.Count + 1 > LogLength)
-            {
-                MessageLog.RemoveAt(0);
-            }
+            if (MessageLog.LastChatMessages.Count >= MessageLog.chatMessageQueueLength - 1)
+                MessageLog.LastChatMessages.RemoveAt(0);
+            MessageLog.LastChatMessages.Add(chatMessage);
+            if (!ViewerController.ViewerExists(chatMessage.Username))
+                return;
+            ViewerTracker.UpdateViewer(ViewerController.GetViewer(chatMessage.Username));
+        }
 
-            MessageLog.Add(message);
+        public static void LogMessage(WhisperMessage whisperMessage)
+        {
+            if (MessageLog.LastWhisperMessages.Count >= MessageLog.whisperMessageQueueLength - 1)
+                MessageLog.LastWhisperMessages.RemoveAt(0);
+            MessageLog.LastWhisperMessages.Add(whisperMessage);
         }
     }
 }

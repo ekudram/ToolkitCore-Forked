@@ -1,8 +1,6 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using ToolkitCore.Models;
 using ToolkitCore.Utilities;
-using TwitchLib.Client.Models;
 using UnityEngine;
 using Verse;
 
@@ -10,27 +8,23 @@ namespace ToolkitCore.Windows
 {
     public class MainTabWindow_ToolkitCore : MainTabWindow
     {
-
         public override void DoWindowContents(Rect inRect)
         {
-            Listing_Standard listing = new Listing_Standard();
-            listing.Begin(inRect);
+            Listing_Standard listingStandard = new Listing_Standard();
+            listingStandard.Begin(inRect);
 
-            listing.Label("Toolkit Quick Menu");
-
-            foreach (ToolkitAddon addon in AddonRegistry.ToolkitAddons)
+            listingStandard.Label("Toolkit Quick Menu");
+            foreach (ToolkitAddon toolkitAddon in AddonRegistry.ToolkitAddons)
             {
-                if (listing.ButtonText(addon.LabelCap))
-                {
-                    Find.WindowStack.Add(new FloatMenu(addon.GetAddonMenu().MenuOptions()));
-                }
+                if (listingStandard.ButtonText(toolkitAddon.LabelCap))
+                    Find.WindowStack.Add(new FloatMenu(toolkitAddon.GetAddonMenu().MenuOptions()));
             }
 
-            listing.End();
+            listingStandard.End();
         }
 
-        public override Vector2 RequestedTabSize => new Vector2(300f, 100f + (AddonRegistry.ToolkitAddons.Count * 32f) );
+        public override Vector2 RequestedTabSize => new Vector2(300f, (float)(100.0 + (double)AddonRegistry.ToolkitAddons.Count * 32.0));
 
-        public override MainTabWindowAnchor Anchor => MainTabWindowAnchor.Right;
+        public override MainTabWindowAnchor Anchor => (MainTabWindowAnchor)1;
     }
 }

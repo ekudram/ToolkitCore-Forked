@@ -1,63 +1,40 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToolkitCore.Interfaces;
-using TwitchLib.Client.Enums;
+﻿using System;
 using TwitchLib.Client.Interfaces;
-using TwitchLib.Client.Models;
 using Verse;
 
 namespace ToolkitCore.Models
 {
-    [Serializable]
-    public class ToolkitChatCommand : Def
+    public class ToolkitChatCommand : Def, IExposable
     {
         public string commandText;
-
         public bool enabled;
-
         public Type commandClass;
+        public bool requiresMod;
+        public bool requiresBroadcaster;
 
-        public Role permissionRole;
-
-        public bool TryExecute(ICommand command)
+        public bool TryExecute(ITwitchCommand twitchCommand)
         {
             try
             {
-                CommandMethod method = (CommandMethod)Activator.CreateInstance(commandClass, this);
-
-                if (!method.CanExecute(command)) return false;
-
-                method.Execute(command);
+                CommandMethod instance = (CommandMethod)Activator.CreateInstance(this.commandClass, (object)this);
+                if (!instance.CanExecute(twitchCommand))
+                    return false;
+                instance.Execute(twitchCommand);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Log.Error(e.Message);
+                Log.Error(ex.Message);
             }
-
             return true;
         }
-    }
 
-    [JsonObject(MemberSerialization.OptIn)]
-    public class ToolkitChatCommandWrapper
-    {
-        [JsonProperty]
-        public string CommandText { get; set; }
-        [JsonProperty]
-        public bool Enabled { get; set; }
-        [JsonProperty]
-        public Role PermissionRole { get; set; }
-        [JsonProperty]
-        public string DefName { get; set; }
-        public ToolkitChatCommand Def { get; set; }
-
-        public bool TryExecute(ICommand command)
+        public void ExposeData()
         {
-            return this.Def.TryExecute(command);
+            Scribe_Values.Look<string>(ref this.commandText, "commandText", "helloworld", false);
+            Scribe_Values.Look<bool>(ref this.enabled, "enabled", true, false);
+            Scribe_Values.Look<Type>(ref this.commandClass, "commandClass", typeof(CommandMethod), false);
+            Scribe_Values.Look<bool>(ref this.requiresMod, "requiresMod", false, false);
+            Scribe_Values.Look<bool>(ref this.requiresBroadcaster, "requiresBroadcaster", false, false);
         }
     }
 }

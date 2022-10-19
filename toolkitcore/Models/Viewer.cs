@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToolkitCore.Controllers;
-using ToolkitCore.Database;
+﻿using System.Collections.Generic;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Models;
 using UnityEngine;
@@ -12,50 +6,32 @@ using Verse;
 
 namespace ToolkitCore.Models
 {
-    public static class Viewers
-    {
-        public static List<Viewer> All
-        {
-            get
-            {
-                return ToolkitData.globalDatabase.viewers;
-            }
-        }
-    }
-
     public class Viewer : IExposable
     {
         public string Username;
-
         public string DisplayName;
-
         public string UserId;
-
         public bool IsBroadcaster;
-
         public bool IsBot;
-
         public bool IsModerator;
-
         public bool IsSubscriber;
-
         public List<KeyValuePair<string, string>> Badges;
-
         public UserType UserType;
-
-        public List<string> Permissions;
 
         public Viewer()
         {
-
         }
 
-        public Viewer(string username)
-        {
-            this.Username = username;
-        }
+        public Viewer(string username) => this.Username = username;
 
-        public Viewer(string Username = null, string DisplayName = null, string UserId = null, bool IsBroadcaster = false, bool IsBot = false, bool IsModerator = false, bool IsSubscriber = false)
+        public Viewer(
+          string Username = null,
+          string DisplayName = null,
+          string UserId = null,
+          bool IsBroadcaster = false,
+          bool IsBot = false,
+          bool IsModerator = false,
+          bool IsSubscriber = false)
         {
             this.Username = Username;
             this.DisplayName = DisplayName;
@@ -66,37 +42,18 @@ namespace ToolkitCore.Models
             this.IsSubscriber = IsSubscriber;
         }
 
-        public bool HasPermission(string permission)
-        {
-            return this.Permissions.Contains(permission);
-        }
-
-        public void AddPermission(string permission)
-        {
-            this.Permissions.Add(permission);
-        }
-
-        public void RemovePermission(string permission)
-        {
-            this.Permissions.Remove(permission);
-        }
-
         public void ExposeData()
         {
-            Scribe_Values.Look(ref Username, "Username");
-            Scribe_Values.Look(ref DisplayName, "DisplayName");
-            Scribe_Values.Look(ref UserId, "UserId");
-            Scribe_Values.Look(ref IsBroadcaster, "IsBroadcaster");
-            Scribe_Values.Look(ref IsBot, "IsBot");
-            Scribe_Values.Look(ref IsModerator, "IsModerator");
-            Scribe_Values.Look(ref IsSubscriber, "IsSubscriber");
-            Scribe_Collections.Look(ref Permissions, "Permissions");
+            Scribe_Values.Look<string>(ref this.Username, "Username", (string)null, false);
+            Scribe_Values.Look<string>(ref this.DisplayName, "DisplayName", (string)null, false);
+            Scribe_Values.Look<string>(ref this.UserId, "UserId", (string)null, false);
+            Scribe_Values.Look<bool>(ref this.IsBroadcaster, "IsBroadcaster", false, false);
+            Scribe_Values.Look<bool>(ref this.IsBot, "IsBot", false, false);
+            Scribe_Values.Look<bool>(ref this.IsModerator, "IsModerator", false, false);
+            Scribe_Values.Look<bool>(ref this.IsSubscriber, "IsSubscriber", false, false);
         }
 
-        public string ToJson()
-        {
-            return JsonUtility.ToJson(this, true);
-        }
+        public string ToJson() => JsonUtility.ToJson((object)this, true);
 
         public void UpdateViewerFromMessage(ChatMessage chatMessage)
         {
@@ -108,19 +65,18 @@ namespace ToolkitCore.Models
             this.IsSubscriber = chatMessage.IsSubscriber;
             this.Badges = chatMessage.Badges;
             this.UserType = chatMessage.UserType;
-
-            CheckIfNewViewer();
+            this.CheckIfNewViewer();
         }
 
-        
-
-        void CheckIfNewViewer()
+        private void CheckIfNewViewer()
         {
             lock (Viewers.All)
             {
                 lock (Viewers.All)
                 {
-                    if (!Viewers.All.Contains(this)) Viewers.All.Add(this);
+                    if (Viewers.All.Contains(this))
+                        return;
+                    Viewers.All.Add(this);
                 }
             }
         }

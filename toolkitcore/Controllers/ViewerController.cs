@@ -1,40 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToolkitCore.Models;
-using Verse;
-using static ToolkitCore.Models.Services;
 
 namespace ToolkitCore.Controllers
 {
     public static class ViewerController
     {
-        public static Viewer GetViewer(Service service, string username)
+        public static Viewer CreateViewer(string Username)
         {
-            if (ViewerList.Instance.All == null)
-            {
-                ViewerList.Instance.All = new List<Viewer>();
-                return null;
-            }
-
-            return ViewerList.Instance.All.Find((v) => v.Service == service && v.Username == username);
+            Viewer viewer = !ViewerController.ViewerExists(Username) ? new Viewer(Username) : throw new Exception("Viewer already exists");
+            Viewers.All.Add(viewer);
+            return viewer;
         }
 
-        public static bool ViewerExists(Service service, string username)
-        {
-            return GetViewer(service, username) != null;
-        }
+        public static Viewer GetViewer(string Username) => Viewers.All.Find((Predicate<Viewer>)(vwr => vwr.Username == Username));
 
-        public static Viewer CreateViewer(Service service, string username, int userId)
-        {
-            return new Viewer()
-            {
-                Service = service,
-                Username = username,
-                UserId = userId
-            };
-        }
+        public static bool ViewerExists(string Username) => Viewers.All.Find((Predicate<Viewer>)(x => x.Username == Username)) != null;
     }
 }

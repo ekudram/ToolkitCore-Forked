@@ -1,10 +1,7 @@
-﻿using System;
+﻿using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToolkitCore.Interfaces;
-using ToolkitCore.Models;
 using ToolkitCore.Windows;
 using UnityEngine;
 using Verse;
@@ -13,42 +10,27 @@ namespace ToolkitCore
 {
     public class AddonMenu : IAddonMenu
     {
-        List<FloatMenuOption> IAddonMenu.MenuOptions() => new List<FloatMenuOption>
+        List<FloatMenuOption> IAddonMenu.MenuOptions()
         {
-            new FloatMenuOption("Settings", delegate ()
-            {
-                Window_ModSettings window = new Window_ModSettings(LoadedModManager.GetMod<ToolkitCore>());
-                Find.WindowStack.TryRemove(window.GetType());
-                Find.WindowStack.Add(window);
-            }),
-            new FloatMenuOption("Services", delegate ()
-            {
-                Window_Services window = new Window_Services();
-                Find.WindowStack.TryRemove(window.GetType());
-                Find.WindowStack.Add(window);
-            }),
-            new FloatMenuOption("Twitch", delegate ()
-            {
-                Window_Services window = new Window_Services(Window_Services.Tab.Twitch);
-                Find.WindowStack.TryRemove(window.GetType());
-                Find.WindowStack.Add(window);
-            }),
-            new FloatMenuOption("Message Log", delegate()
-            {
-                Window_MessageLog window = new Window_MessageLog();
-                Find.WindowStack.TryRemove(window.GetType());
-                Find.WindowStack.Add(window);
-            }),
-            new FloatMenuOption("Commands", delegate()
-            {
-                Window_Commands window = new Window_Commands();
-                Find.WindowStack.TryRemove(window.GetType());
-                Find.WindowStack.Add(window);
-            }),
-            new FloatMenuOption("Help", delegate()
-            {
-                Application.OpenURL("https://github.com/hodldeeznuts/ToolkitCore/wiki");
-            })
-        };
+            List<FloatMenuOption> floatMenuOptionList = new List<FloatMenuOption>{
+                new FloatMenuOption("Settings", delegate ()
+                {
+                    Window_ModSettings windowModSettings = new Window_ModSettings((Mod) LoadedModManager.GetMod<ToolkitCore>());
+                    Find.WindowStack.TryRemove(((object) windowModSettings).GetType(), true);
+                    Find.WindowStack.Add((Window) windowModSettings);
+                },(MenuOptionPriority) 4),
+                new FloatMenuOption("Message Log", delegate ()
+                {
+                    Window_MessageLog windowMessageLog = new Window_MessageLog();
+                    Find.WindowStack.TryRemove(((object)windowMessageLog).GetType(), true);
+                    Find.WindowStack.Add((Window)windowMessageLog);
+                },(MenuOptionPriority) 4),
+                new FloatMenuOption("Help", delegate ()
+                {
+                    Application.OpenURL("https://github.com/hodldeeznuts/ToolkitCore/wiki");
+                },(MenuOptionPriority) 4)
+            };
+            return floatMenuOptionList;
+        }
     }
 }

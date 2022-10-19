@@ -1,11 +1,4 @@
-﻿using NAudio.Mixer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToolkitCore.Interfaces;
-using ToolkitCore.Models;
+﻿using ToolkitCore.Models;
 using ToolkitCore.Utilities;
 using TwitchLib.Client.Models;
 using UnityEngine;
@@ -15,38 +8,43 @@ namespace ToolkitCore.Windows
 {
     public class Window_MessageLog : Window
     {
-        static Texture2D mixerIcon = ContentFinder<Texture2D>.Get("UI/Icons/mixerIcon");
-        static Texture2D twitchIcon = ContentFinder<Texture2D>.Get("UI/Icons/twitchIcon");
-
-        public Window_MessageLog()
-        {
-            doCloseButton = true;
-        }
+        public Window_MessageLog() => this.doCloseButton = true;
 
         public override void DoWindowContents(Rect inRect)
         {
-            GameFont original = Text.Font;
-            Text.Font = GameFont.Small;
-
-            Rect serviceIcon = new Rect(0, 0, 24, 24);
-            Rect messageBox = new Rect(30, 0, 500, 0);
-
-            foreach (IMessage message in MessageLogger.MessageLog)
+            Listing_Standard listingStandard = new Listing_Standard();
+            ((Listing)listingStandard).Begin(inRect);
+            listingStandard.Label("Twitch Message Log", -1f, (string)null);
+            ((Listing)listingStandard).ColumnWidth = ((Rect)inRect).width * 0.3f;
+            if (TwitchWrapper.Client != null)
             {
-                float rowHeight = Text.CalcHeight(message.Message(), messageBox.width);
-                GUI.DrawTexture(serviceIcon, message.Service() == Services.Service.Twitch ? twitchIcon : mixerIcon);
-
-                messageBox.height = rowHeight;
-
-                Widgets.Label(messageBox, $"{message.Username()}: {message.Message()}");
-
-                serviceIcon.y += rowHeight;
-                messageBox.y += rowHeight;
+                bool isConnected = TwitchWrapper.Client.IsConnected;
+                listingStandard.Label(isConnected ? TCText.ColoredText("Connected", Color.green) : TCText.ColoredText("Not Connected", Color.red), -1f, (string)null);
+                if (listingStandard.ButtonText(isConnected ? "Disconnect" : "Connect", (string)null))
+                    TwitchWrapper.Client.Disconnect();
             }
-
-            Text.Font = original;
+            else if (listingStandard.ButtonText("Reset Twitch Client", (string)null))
+                TwitchWrapper.StartAsync();
+            ((Listing)listingStandard).End();
+            float num = ((Rect)inRect).width * 0.49f;
+            Rect rect1 = new Rect(0.0f, 100f, num, 32f);
+            Widgets.Label(rect1, "Message Log");
+            Rect rect2 = new Rect(0.0f, 132f, num, 200f); ;
+            string str1 = "";
+            foreach (ChatMessage lastChatMessage in MessageLog.LastChatMessages)
+                str1 = str1 + lastChatMessage.DisplayName + ": " + lastChatMessage.Message + "\n";
+            Widgets.TextArea(rect2, str1, true);
+            Rect rect3 = new Rect(rect1);
+            Rect local1 = rect3;
+            local1.x = local1.x + (num + 10f);
+            Widgets.Label(rect3, "Whisper Log");
+            Rect rect4 = new Rect(rect2);
+            Rect local2 = rect4;
+            local2.x = local2.x + (rect4.width + 10f);
+            string str2 = "";
+            foreach (WhisperMessage lastWhisperMessage in MessageLog.LastWhisperMessages)
+                str2 = str2 + lastWhisperMessage.DisplayName + ": " + lastWhisperMessage.Message + "\n";
+            Widgets.TextArea(rect4, str2, true);
         }
-
-        public override Vector2 InitialSize => new Vector2(600, UI.screenHeight - 100f);
     }
 }

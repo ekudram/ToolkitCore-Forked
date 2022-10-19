@@ -1,36 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToolkitCore.Interfaces;
-using TwitchLib.Client.Interfaces;
-using TwitchLib.Client.Models;
-using Verse;
+﻿using TwitchLib.Client.Interfaces;
 
 namespace ToolkitCore.Models
 {
     public class CommandMethod
     {
-        public ToolkitChatCommand ToolkitChatCommand;
+        public ToolkitChatCommand command;
 
-        public CommandMethod(ToolkitChatCommand command)
+        public CommandMethod(ToolkitChatCommand command) => this.command = command;
+
+        public virtual bool CanExecute(ITwitchCommand twitchCommand) => this.command.enabled && (!this.command.requiresBroadcaster || twitchCommand.ChatMessage == null || twitchCommand.ChatMessage.IsBroadcaster) && (!this.command.requiresMod || twitchCommand.ChatMessage == null || twitchCommand.ChatMessage.IsBroadcaster || twitchCommand.ChatMessage.IsModerator);
+
+        public virtual void Execute(ITwitchCommand twitchCommand)
         {
-            this.ToolkitChatCommand = command;
-        }
-
-        public virtual bool CanExecute(ICommand command)
-        {
-            // If command not enabled
-            if (!ToolkitChatCommand.enabled) return false;
-            Log.Message("Command enabled");
-
-            return true;
-        }
-
-        public virtual void Execute(ICommand command)
-        {
-
         }
     }
 }
