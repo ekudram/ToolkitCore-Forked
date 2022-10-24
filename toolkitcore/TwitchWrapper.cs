@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
-using System.Threading.Tasks;
 using ToolkitCore.Controllers;
 using ToolkitCore.Models;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
-using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
-using TwitchLib.Client.Models.Interfaces;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
 using TwitchLib.Communication.Interfaces;
@@ -115,9 +111,7 @@ namespace ToolkitCore
                 return;
             foreach (TwitchInterfaceBase twitchInterfaceBase in (Current.Game.components).OfType<TwitchInterfaceBase>().ToList<TwitchInterfaceBase>())
             {
-                Task.Run(() => {
-                    twitchInterfaceBase.ParseMessage(e.ChatMessage);
-                });
+                twitchInterfaceBase.ParseMessage(e.ChatMessage);
             }
         }
 

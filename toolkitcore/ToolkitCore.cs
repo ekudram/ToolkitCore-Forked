@@ -10,11 +10,14 @@ namespace ToolkitCore
         public ToolkitCore(ModContentPack content)
           : base(content)
         {
-            ToolkitCore.settings = this.GetSettings<ToolkitCoreSettings>();
+            GetSettings<ToolkitCoreSettings>();
         }
 
         public override string SettingsCategory() => nameof(ToolkitCore);
 
-        public override void DoSettingsWindowContents(Rect inRect) => ToolkitCore.settings.DoWindowContents(inRect);
+        public override void DoSettingsWindowContents(Rect inRect)
+        {
+            ToolkitCore.settings.DoWindowContents(inRect);
+        }
     }
 }

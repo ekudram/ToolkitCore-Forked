@@ -10,6 +10,6 @@ namespace ToolkitCore.Utilities
     {
         public static List<ToolkitAddon> ToolkitAddons { get; set; }
 
-        static AddonRegistry() => AddonRegistry.ToolkitAddons = DefDatabase<ToolkitAddon>.AllDefs.ToList<ToolkitAddon>();
+        static AddonRegistry() => ToolkitAddons = DefDatabase<ToolkitAddon>.AllDefs.ToList();
     }
 }

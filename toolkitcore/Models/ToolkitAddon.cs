@@ -8,6 +8,6 @@ namespace ToolkitCore.Models
     {
         public Type menuClass = typeof(IAddonMenu);
 
-        public IAddonMenu GetAddonMenu() => Activator.CreateInstance(this.menuClass) as IAddonMenu;
+        public IAddonMenu GetAddonMenu() => Activator.CreateInstance(menuClass) as IAddonMenu;
     }
 }

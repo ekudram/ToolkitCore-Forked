@@ -13,9 +13,9 @@ namespace ToolkitCore.Windows
         public override void DoWindowContents(Rect inRect)
         {
             Listing_Standard listingStandard = new Listing_Standard();
-            ((Listing)listingStandard).Begin(inRect);
+            listingStandard.Begin(inRect);
             listingStandard.Label("Twitch Message Log", -1f, (string)null);
-            ((Listing)listingStandard).ColumnWidth = ((Rect)inRect).width * 0.3f;
+            listingStandard.ColumnWidth = ((Rect)inRect).width * 0.3f;
             if (TwitchWrapper.Client != null)
             {
                 bool isConnected = TwitchWrapper.Client.IsConnected;
@@ -25,8 +25,8 @@ namespace ToolkitCore.Windows
             }
             else if (listingStandard.ButtonText("Reset Twitch Client", (string)null))
                 TwitchWrapper.StartAsync();
-            ((Listing)listingStandard).End();
-            float num = ((Rect)inRect).width * 0.49f;
+            listingStandard.End();
+            float num = inRect.width * 0.49f;
             Rect rect1 = new Rect(0.0f, 100f, num, 32f);
             Widgets.Label(rect1, "Message Log");
             Rect rect2 = new Rect(0.0f, 132f, num, 200f); ;

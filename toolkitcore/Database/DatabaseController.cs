@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 using Verse;
@@ -38,7 +37,7 @@ namespace ToolkitCore.Database
             else
             {
                 fileName = mod.Content.Name.Replace(" ", "") + "_" + fileName + ".json";
-                DatabaseController.SaveFile(JsonConvert.SerializeObject(obj, Formatting.Indented), fileName);
+                DatabaseController.SaveFile(JsonUtility.ToJson(obj), fileName);
             }
         }
 
@@ -57,7 +56,7 @@ namespace ToolkitCore.Database
                 Log.Warning("Tried to load " + fileName + " but could not find file");
                 return false;
             }
-            obj = JsonConvert.DeserializeObject<T>(json);
+            obj = JsonUtility.FromJson<T>(json);
             return true;
         }
 
