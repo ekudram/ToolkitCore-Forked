@@ -24,28 +24,25 @@ namespace ToolkitCore
             {
                 Application.OpenURL("https://github.com/hodldeeznuts/ToolkitCore/wiki/Twitch-Chat-Connection");
             }
-            Rect val = new Rect(0f, verticalSpacing, ((inRect)).width / 2f, 64f);
+            Rect val = new Rect(0f, verticalSpacing, inRect.width / 2f, 64f);
             Widgets.Label(val, TCText.BigText("Channel Details"));
-            float num = ((val)).y + verticalSpacing * 2f;
-            Rect val2;
-            ((val2)) = new Rect(0f, num, 200f, verticalHeight);
+            float num = val.y + verticalSpacing * 2f;
+            Rect val2 = new Rect(0f, num, 200f, verticalHeight);
             Widgets.Label(val2, "Channel:");
-            ((val2)).y = (((val2)).y + verticalSpacing);
+            val2.y = val2.y + verticalSpacing;
             Widgets.Label(val2, "Bot Username:");
-            ((val2)).y = (((val2)).y + verticalSpacing);
+            val2.y = val2.y + verticalSpacing;
             Widgets.Label(val2, "OAuth Token:");
-            Rect val3;
-            ((val3)) = new Rect(200f, num, 200f, verticalHeight);
+            Rect val3 = new Rect(200f, num, 200f, verticalHeight);
             channel_username = Widgets.TextField(val3, channel_username);
-            ((val3)).y = (((val3)).y + verticalSpacing);
+            val3.y = val3.y + verticalSpacing;
             bot_username = Widgets.TextField(val3, bot_username);
             if (channel_username != "" && Widgets.ButtonText(new Rect(((val3)).x + ((val3)).width + 10f, ((val3)).y, 210f, verticalHeight), "Same as Channel", true, true, true))
             {
                 bot_username = channel_username;
             }
             val3.y = val3.y + verticalSpacing;
-            Rect val4;
-            ((val4)) = new Rect(((val3)).x + ((val3)).width + 10f, ((val3)).y, 60f, verticalHeight);
+            Rect val4 = new Rect(((val3)).x + ((val3)).width + 10f, ((val3)).y, 60f, verticalHeight);
             if (showOauth)
             {
                 oauth_token = Widgets.TextField(val3, oauth_token);
@@ -66,20 +63,18 @@ namespace ToolkitCore
             {
                 Application.OpenURL("https://www.twitchapps.com/tmi/");
             }
-        ((val3)).y = (((val3)).y + verticalSpacing);
+            val3.y = val3.y + verticalSpacing;
             if (Widgets.ButtonText(val3, "Paste from Clipboard", true, true, true))
             {
                 oauth_token = GUIUtility.systemCopyBuffer;
             }
-            Rect val5;
-            ((val5)) = new Rect(0f, ((val3)).y + verticalSpacing * 2f, ((inRect)).width / 2f, 64f);
+            Rect val5 = new Rect(0f, val3.y + verticalSpacing * 2f, inRect.width / 2f, 64f);
             Widgets.Label(val5, TCText.BigText("Connection"));
-            num = ((val5)).y + verticalSpacing * 2f;
-            ((val2)).y = (num);
+            num = val5.y + verticalSpacing * 2f;
+            val2.y = (num);
             val3.y = num;
             Widgets.Label(val2, "Status:");
-            Rect val6;
-            ((val6)) = new Rect(((val3)).x + ((val3)).width + 2f, ((val3)).y, ((val3)).width, verticalHeight);
+            Rect val6 = new Rect(((val3)).x + ((val3)).width + 2f, ((val3)).y, ((val3)).width, verticalHeight);
             if (TwitchWrapper.Client != null && TwitchWrapper.Client.IsConnected)
             {
                 Widgets.Label(val3, TCText.ColoredText("Connected", Color.green));
@@ -96,22 +91,22 @@ namespace ToolkitCore
                     TwitchWrapper.StartAsync();
                 }
             }
-            ((val2)).y = (((val2)).y + verticalSpacing);
+            val2.y = val2.y + verticalSpacing;
             Widgets.Label(val2, "Auto Connect on Startup:");
-            ((val3)).y = (((val2)).y);
+            val3.y = val2.y;
             Widgets.Checkbox(((val3)).position, ref connectOnGameStartup, 24f, false, false, null, null);
-            (val2).y = (((val2)).y + verticalSpacing);
+            val2.y = val2.y + verticalSpacing;
             Widgets.Label(val2, "Allow Viewers to Whisper:");
-            ((val3)).y = (((val2)).y);
+            val3.y = val2.y;
             Widgets.Checkbox(((val3)).position, ref allowWhispers, 24f, false, false, null, null);
-            ((val2)).y = val2.y + verticalSpacing;
+            val2.y = val2.y + verticalSpacing;
             Widgets.Label(val2, "Force Viewers to Whisper:");
-            ((val3)).y = (((val2)).y);
+            val3.y = val2.y;
             Widgets.Checkbox(((val3)).position, ref forceWhispers, 24f, false, false, null,null);
-            (val2).y = (((val2)).y + verticalSpacing);
+            val2.y = val2.y + verticalSpacing;
             Widgets.Label(val2, "Send Connection Message:");
-            (val3).y = (((val2)).y);
-            Widgets.Checkbox(((val3)).position, ref sendMessageToChatOnStartup, 24f, false, false, null, null);
+            val3.y = val2.y;
+            Widgets.Checkbox(((val3)).position, ref sendMessageToChatOnStartup, 24f);
         }
 
         public override void ExposeData()
