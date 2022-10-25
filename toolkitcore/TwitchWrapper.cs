@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ToolkitCore.Controllers;
 using ToolkitCore.Models;
 using TwitchLib.Client;
@@ -77,18 +78,24 @@ namespace ToolkitCore
 
         private static void OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
         {
-            if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
-                return;
-            foreach (TwitchInterfaceBase twitchInterfaceBase in (Current.Game.components).OfType<TwitchInterfaceBase>().ToList<TwitchInterfaceBase>())
-                twitchInterfaceBase.ParseMessage(e.WhisperMessage);
-            MessageLog.LogMessage(e.WhisperMessage);
+            Task.Run(() =>
+            {
+                if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
+                    return;
+                foreach (TwitchInterfaceBase twitchInterfaceBase in (Current.Game.components).OfType<TwitchInterfaceBase>().ToList<TwitchInterfaceBase>())
+                    twitchInterfaceBase.ParseMessage(e.WhisperMessage);
+                MessageLog.LogMessage(e.WhisperMessage);
+            });
         }
 
         private static void OnWhisperCommandReceived(object sender, OnWhisperCommandReceivedArgs e)
         {
-            if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
-                return;
-            ChatCommandController.GetChatCommand(e.Command.CommandText)?.TryExecute(e.Command);
+            Task.Run(() =>
+            {
+                if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
+                    return;
+                ChatCommandController.GetChatCommand(e.Command.CommandText)?.TryExecute(e.Command);
+            });
         }
 
         private static void OnConnected(object sender, OnConnectedArgs e)
@@ -97,29 +104,39 @@ namespace ToolkitCore
 
         private static void OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
-            if (!ToolkitCoreSettings.sendMessageToChatOnStartup)
-                return;
-            TwitchWrapper.Client.SendMessage(e.Channel, "Toolkit Core has Connected to Chat", false);
+            Task.Run(() =>
+            {
+                if (!ToolkitCoreSettings.sendMessageToChatOnStartup)
+                    return;
+                TwitchWrapper.Client.SendMessage(e.Channel, "Toolkit Core has Connected to Chat", false);
+            });
         }
 
         private static void OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            MessageLog.LogMessage(e.ChatMessage);
-            if (e.ChatMessage.Bits > 0)
-                Log.Message("Bits donated : " + e.ChatMessage.Bits.ToString());
-            if (Current.Game == null)
-                return;
-            foreach (TwitchInterfaceBase twitchInterfaceBase in (Current.Game.components).OfType<TwitchInterfaceBase>().ToList<TwitchInterfaceBase>())
+            Task.Run(() =>
             {
-                twitchInterfaceBase.ParseMessage(e.ChatMessage);
-            }
+                MessageLog.LogMessage(e.ChatMessage);
+                if (e.ChatMessage.Bits > 0)
+                    Log.Message("Bits donated : " + e.ChatMessage.Bits.ToString());
+                if (Current.Game == null)
+                    return;
+                foreach (TwitchInterfaceBase twitchInterfaceBase in (Current.Game.components).OfType<TwitchInterfaceBase>().ToList<TwitchInterfaceBase>())
+                {
+                    twitchInterfaceBase.ParseMessage(e.ChatMessage);
+                }
+            });
+
         }
 
         private static void OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
-            if (Current.Game == null || ToolkitCoreSettings.forceWhispers)
-                return;
-            ChatCommandController.GetChatCommand(e.Command.CommandText)?.TryExecute(e.Command);
+            Task.Run(() =>
+            {
+                if (Current.Game == null || ToolkitCoreSettings.forceWhispers)
+                    return;
+                ChatCommandController.GetChatCommand(e.Command.CommandText)?.TryExecute(e.Command);
+            });
         }
 
         public static void OnBeingHosted(object sender, OnBeingHostedArgs e)

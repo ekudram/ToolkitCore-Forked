@@ -9,6 +9,6 @@ namespace ToolkitCore.Database
     {
         public List<Viewer> viewers = new List<Viewer>();
 
-        public override void ExposeData() => Scribe_Collections.Look<Viewer>(ref this.viewers, "viewers", (LookMode)2, Array.Empty<object>());
+        public override void ExposeData() => Scribe_Collections.Look<Viewer>(ref viewers, "viewers", LookMode.Deep);
     }
 }

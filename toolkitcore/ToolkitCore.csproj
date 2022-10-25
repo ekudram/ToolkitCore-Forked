@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddonMenu.cs" />
+    <Compile Include="CommandInterfaceBase.cs" />
     <Compile Include="CommandMethods\HelloWorld.cs" />
     <Compile Include="Controllers\ChatCommandController.cs" />
     <Compile Include="Controllers\ViewerController.cs" />
@@ -44,7 +45,10 @@
     <Compile Include="Database\GlobalDatabase.cs" />
     <Compile Include="HarmonyPatches\SavePatch.cs" />
     <Compile Include="Interfaces\IAddonMenu.cs" />
+    <Compile Include="Interfaces\IMessage.cs" />
+    <Compile Include="Interfaces\MessageInterfaceBase.cs" />
     <Compile Include="Models\MessageLog.cs" />
+    <Compile Include="Models\Services.cs" />
     <Compile Include="Models\Viewer.cs" />
     <Compile Include="Models\Viewers.cs" />
     <Compile Include="Models\ToolkitAddon.cs" />
@@ -58,6 +62,8 @@
     <Compile Include="TwitchInterfaceBase.cs" />
     <Compile Include="Utilities\AddonRegistry.cs" />
     <Compile Include="Utilities\CommandFilter.cs" />
+    <Compile Include="Utilities\CommandInterface.cs" />
+    <Compile Include="Utilities\MessageInterface.cs" />
     <Compile Include="Utilities\TCText.cs" />
     <Compile Include="Utilities\ViewerInterface.cs" />
     <Compile Include="Utilities\ViewerTracker.cs" />
@@ -91,6 +97,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\RimWorld.v1.4.3514\RimWorld.v1.4.3514\RimWorld.v1.4.3514\Mods\TwitchToolkit\Assemblies\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="TwitchLib.Client, Version=3.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\references\TwitchLib.Client.dll</HintPath>

@@ -10,7 +10,16 @@ namespace ToolkitCore
         public ToolkitCore(ModContentPack content)
           : base(content)
         {
-            ToolkitCore.settings = this.GetSettings<ToolkitCoreSettings>();
+            ToolkitCore.settings = GetSettings<ToolkitCoreSettings>();
+            Init();
+        }
+
+        public void Init()
+        {
+            if(settings != null && settings.canConnectOnStartup())
+            {
+                TwitchWrapper.StartAsync();
+            }
         }
 
         public override string SettingsCategory() => nameof(ToolkitCore);

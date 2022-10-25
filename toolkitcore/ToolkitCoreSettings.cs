@@ -107,6 +107,7 @@ namespace ToolkitCore
             Widgets.Label(val2, "Send Connection Message:");
             val3.y = val2.y;
             Widgets.Checkbox(((val3)).position, ref sendMessageToChatOnStartup, 24f);
+
         }
 
         public override void ExposeData()
@@ -118,6 +119,12 @@ namespace ToolkitCore
             Scribe_Values.Look<bool>(ref ToolkitCoreSettings.allowWhispers, "allowWhispers", true, false);
             Scribe_Values.Look<bool>(ref ToolkitCoreSettings.sendMessageToChatOnStartup, "sendMessageToChatOnStartup", true, false);
             Scribe_Values.Look<bool>(ref ToolkitCoreSettings.forceWhispers, "forceWhispers", false, false);
+        }
+
+        public bool canConnectOnStartup()
+        {
+            ExposeData();
+            return (connectOnGameStartup && !string.IsNullOrEmpty(bot_username) && !string.IsNullOrEmpty(oauth_token));
         }
     }
 }
