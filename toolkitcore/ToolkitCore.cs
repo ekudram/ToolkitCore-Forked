@@ -16,7 +16,7 @@ namespace ToolkitCore
 
         public void Init()
         {
-            if(settings != null && settings.canConnectOnStartup())
+            if(settings != null && settings.canConnectOnStartup() && !string.IsNullOrEmpty(ToolkitCoreSettings.bot_username) && !string.IsNullOrEmpty(ToolkitCoreSettings.oauth_token))
             {
                 TwitchWrapper.StartAsync();
             }
