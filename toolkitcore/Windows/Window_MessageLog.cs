@@ -14,12 +14,12 @@ namespace ToolkitCore.Windows
         {
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect);
-            listingStandard.Label("Twitch Message Log", -1f, (string)null);
+            listingStandard.Label("Twitch Message Log");
             listingStandard.ColumnWidth = ((Rect)inRect).width * 0.3f;
             if (TwitchWrapper.Client != null)
             {
                 bool isConnected = TwitchWrapper.Client.IsConnected;
-                listingStandard.Label(isConnected ? TCText.ColoredText("Connected", Color.green) : TCText.ColoredText("Not Connected", Color.red), -1f, (string)null);
+                listingStandard.Label(isConnected ? TCText.ColoredText("Connected", Color.green) : TCText.ColoredText("Not Connected", Color.red));
                 if (listingStandard.ButtonText(isConnected ? "Disconnect" : "Connect", (string)null))
                     TwitchWrapper.Client.Disconnect();
             }
