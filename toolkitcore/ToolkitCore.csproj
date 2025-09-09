@@ -117,5 +117,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\references\TwitchLib.Communication.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
