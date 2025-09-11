@@ -32,7 +32,7 @@ namespace ToolkitCore.CommandMethods
         {
             if (ToolkitCore.Instance != null && ToolkitCore.Instance.TwitchWrapper != null)
             {
-                ToolkitCore.Instance.TwitchWrapper.SendChatMessage("Hello World!");
+                ToolkitCore.Instance.TwitchWrapper.SendChatMessageInternal("Hello World!");
             }
         }
     }

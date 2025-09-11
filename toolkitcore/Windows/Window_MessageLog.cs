@@ -40,8 +40,7 @@ namespace ToolkitCore.Windows
             // Check if ToolkitCore is available
             if (ToolkitCore.Instance != null && ToolkitCore.Instance.TwitchWrapper != null)
             {
-                bool isConnected = ToolkitCore.Instance.TwitchWrapper.Client != null &&
-                                  ToolkitCore.Instance.TwitchWrapper.Client.IsConnected;
+                bool isConnected = TwitchWrapper.Client != null && TwitchWrapper.Client.IsConnected;
 
                 listingStandard.Label(isConnected ?
                     TCText.ColoredText("Connected", Color.green) :
@@ -51,7 +50,7 @@ namespace ToolkitCore.Windows
                 {
                     if (isConnected)
                     {
-                        ToolkitCore.Instance.TwitchWrapper.Client.Disconnect();
+                        TwitchWrapper.Client?.Disconnect();
                     }
                     else
                     {

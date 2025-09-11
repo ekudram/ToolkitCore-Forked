@@ -6,43 +6,61 @@
  * Modified Using: DeepSeek AI
  * 
  * Summary of Changes:
- * 1.  Removed static reference to settings to eliminate global state and improve mod reload safety.
- * 2.  Added TwitchWrapper instance field for managing Twitch connections.
- * 3.  Added robust try-catch error handling around the Twitch connection startup to prevent unhandled exceptions from crashing the game.
- * 4.  Refactored the initialization logic for improved readability and maintainability.
- * 5.  Updated the SettingsCategory to return a more user-friendly display name.
+ * 1.  Added back static settings field for backward compatibility with ToolkitUtilities.
+ * 2.  Maintained instance-based settings property for internal use.
+ * 3.  Added static Instance property for global access to the mod instance.
+ * 4.  Added TwitchWrapper instance field for managing Twitch connections.
+ * 5.  Added robust try-catch error handling around the Twitch connection startup.
+ * 6.  Refactored the initialization logic for improved readability and maintainability.
+ * 7.  Updated the SettingsCategory to return a more user-friendly display name.
  * 
  * Why These Changes Were Made:
- * The original code used a static reference to settings, which can cause issues if the mod is reloaded and creates tight coupling.
- * Adding a TwitchWrapper instance allows proper access to the non-static TwitchWrapper class.
- * Error handling is critical for async operations like network connections to ensure game stability.
- * These updates align the mod with modern RimWorld 1.4+ modding best practices for reliability and maintainability.
+ * ToolkitUtilities expects a static settings field, so we need to maintain backward compatibility.
+ * We keep the instance-based architecture for internal use while exposing a static field for compatibility.
+ * This approach allows both the new architecture and existing mods to work together.
  */
 
-using UnityEngine;
-using Verse;
+using System.Linq; // For LINQ operations if needed in future expansions
+using UnityEngine; // For Rect and other Unity types
+using Verse;       // For Mod and ModContentPack 
 
 namespace ToolkitCore
 {
     public class ToolkitCore : Mod
     {
-        // Add the TwitchWrapper instance field here
-        private TwitchWrapper _twitchWrapper;
-        public TwitchWrapper TwitchWrapper => _twitchWrapper;
+        // Static instance for global access
         public static ToolkitCore Instance { get; private set; }
+
+        // Static field for backward compatibility with ToolkitUtilities
+        public static ToolkitCoreSettings settings;
+
+        // TwitchWrapper instance for managing Twitch connections
+        private TwitchWrapper _twitchWrapper;
 
         public ToolkitCore(ModContentPack content) : base(content)
         {
-            Instance = this; // Add this line
+            // Set the static instance
+            Instance = this;
+
+            // Get settings instance
             Settings = GetSettings<ToolkitCoreSettings>();
             Settings.SetMod(this);
+
+            // Set the static field for backward compatibility
+            settings = Settings;
+
+            // Initialize the TwitchWrapper
             _twitchWrapper = new TwitchWrapper(this);
+
+            // Initialize Twitch connection if configured to do so
             Init();
         }
 
-
         // Property to safely access the settings instance without a static field
         public ToolkitCoreSettings Settings { get; }
+
+        // Property to access the TwitchWrapper instance
+        public TwitchWrapper TwitchWrapper => _twitchWrapper;
 
         public override string SettingsCategory() => "Toolkit Core";
 
@@ -55,11 +73,7 @@ namespace ToolkitCore
             if (Settings == null)
                 return;
 
-            // Check if we have the necessary credentials to attempt a connection
-            bool hasValidCredentials = !string.IsNullOrEmpty(Settings.bot_username) &&
-                                       !string.IsNullOrEmpty(Settings.oauth_token);
-
-            if (Settings.canConnectOnStartup() && hasValidCredentials)
+            if (Settings.canConnectOnStartup())
             {
                 try
                 {
