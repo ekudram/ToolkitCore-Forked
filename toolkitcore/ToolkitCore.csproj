@@ -124,4 +124,7 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="AddonMenu.xml" />
+  </ItemGroup>
 </Project>
