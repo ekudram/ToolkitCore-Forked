@@ -7,3 +7,5 @@ This private version does work with Current releases of Toolkit and Utilities as
 
 There is no Release of this version for public but you could comple and use it
 Mind you there are new files for XML tranlations.
+
+You are also free to examine and borrow from this code if you wish.  
