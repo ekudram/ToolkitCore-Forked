@@ -36,6 +36,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About\AddonMenu.cs" />
     <Compile Include="AddonMenu.cs" />
     <Compile Include="CommandInterfaceBase.cs" />
     <Compile Include="CommandMethods\HelloWorld.cs" />

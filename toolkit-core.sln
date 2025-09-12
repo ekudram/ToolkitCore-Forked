@@ -11,6 +11,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\ToolkitCoreSettings.xml = ..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\ToolkitCoreSettings.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Languages", "Languages", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English", "English", "{59D971DB-0EE9-4C90-A66D-6830DECDB982}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Keyed", "Keyed", "{5A208285-A110-4965-BBCD-6E6709F4A78B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\AddonMenu.xml = ..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\AddonMenu.xml
+		..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\ToolkitCoreSettings.xml = ..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\ToolkitCoreSettings.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59D971DB-0EE9-4C90-A66D-6830DECDB982} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5A208285-A110-4965-BBCD-6E6709F4A78B} = {59D971DB-0EE9-4C90-A66D-6830DECDB982}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF67CBC6-1CBD-4409-AE60-FD3DA797F666}
