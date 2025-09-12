@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- English (Source Language) -->
+  <Settings>Settings</Settings>
+  <MessageLog>Message Log</MessageLog>
+  <Help>Help</Help>
+
+  <!-- French (Français) -->
+  <Settings.fr>Paramètres</Settings.fr>
+  <MessageLog.fr>Journal des messages</MessageLog.fr>
+  <Help.fr>Aide</Help.fr>
+
+  <!-- German (Deutsch) -->
+  <Settings.de>Einstellungen</Settings.de>
+  <MessageLog.de>Nachrichtenprotokoll</MessageLog.de>
+  <Help.de>Hilfe</Help.de>
+
+  <!-- Irish (Gaeilge) -->
+  <Settings.ga>Socruithe</Settings.ga>
+  <MessageLog.ga>Loga Teachtaireachtaí</MessageLog.ga>
+  <Help.ga>Cabhair</Help.ga>
+
+  <!-- Japanese (日本語) -->
+  <Settings.ja>設定</Settings.ja>
+  <MessageLog.ja>メッセージログ</MessageLog.ja>
+  <Help.ja>ヘルプ</Help.ja>
+
+  <!-- Russian (Русский) -->
+  <Settings.ru>Настройки</Settings.ru>
+  <MessageLog.ru>Журнал сообщений</MessageLog.ru>
+  <Help.ru>Помощь</Help.ru>
+
+  <!-- Spanish (Español) -->
+  <Settings.es>Configuración</Settings.es>
+  <MessageLog.es>Registro de mensajes</MessageLog.es>
+  <Help.es>Ayuda</Help.es>
+
+  <!-- Scottish Gaelic (Gàidhlig) -->
+  <Settings.gd>Roghainnean</Settings.gd>
+  <MessageLog.gd>Loga nam Teachdaireachdan</MessageLog.gd>
+  <Help.gd>Cobhair</Help.gd>
+
+  <!-- Welsh (Cymraeg) -->
+  <Settings.cy>Gosodiadau</Settings.cy>
+  <MessageLog.cy>Log Negeseuon</MessageLog.cy>
+  <Help.cy>Help</Help.cy>
+
+  <!-- Chinese Simplified (简体中文) -->
+  <Settings.zh>设置</Settings.zh>
+  <MessageLog.zh>消息日志</MessageLog.zh>
+  <Help.zh>帮助</Help.zh>
+
+</LanguageData>
