@@ -36,7 +36,7 @@ namespace ToolkitCore
                 },(MenuOptionPriority) 4),
                 new FloatMenuOption("Help".Translate(), delegate ()
                 {
-                    Application.OpenURL("https://github.com/hodldeeznuts/ToolkitCore/wiki");
+                    Application.OpenURL("https://github.com/ekudram/ToolkitCore-Forked/wiki");
                 },(MenuOptionPriority) 4)
             };
             return floatMenuOptionList;

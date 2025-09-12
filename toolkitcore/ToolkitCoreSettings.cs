@@ -72,7 +72,7 @@ namespace ToolkitCore
             // Help button
             if (Widgets.ButtonText(new Rect(inRect.width - 120f, verticalSpacing, 90f, verticalHeight), "Help".Translate()))
             {
-                Application.OpenURL("https://github.com/hodldeeznuts/ToolkitCore/wiki/Twitch-Chat-Connection");
+                Application.OpenURL("https://github.com/ekudram/ToolkitCore-Forked/wiki/Twitch-Chat-Connection");
             }
 
             // Channel Details section

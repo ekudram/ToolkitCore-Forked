@@ -36,7 +36,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About\AddonMenu.cs" />
     <Compile Include="AddonMenu.cs" />
     <Compile Include="CommandInterfaceBase.cs" />
     <Compile Include="CommandMethods\HelloWorld.cs" />
@@ -127,5 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddonMenu.xml" />
+    <Content Include="Textures\UI\Wiki\TTG_TokenPopup_1.png" />
+    <Content Include="Textures\UI\Wiki\TTG_TokenPopup_2.png" />
+    <Content Include="Textures\UI\Wiki\TTG_TokenPopup_3.png" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
