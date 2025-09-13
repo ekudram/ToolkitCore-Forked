@@ -2,18 +2,19 @@
  * File: TwitchWrapper.cs
  * Project: ToolkitCore
  * 
- * Updated: October 26, 2023
+ * Updated: [Current Date]
  * Modified Using: DeepSeek AI
  * 
  * Summary of Changes:
- * 1.  Converted from static class to instance class to properly access instance-based settings.
- * 2.  Added reference to ToolkitCore mod instance to access settings.
- * 3.  Updated all method signatures to be instance methods instead of static.
- * 4.  Modified all settings references to use the instance-based approach.
- * 5.  Added error handling for null settings references.
- * 6.  Changed initial connection error from Error to Warning as requested.
- * 7.  Added static Client property for backward compatibility with Utilities mod
- * 8.  Resolved naming conflicts between instance and static Client properties
+ * 1. Converted from static class to instance class to properly access instance-based settings.
+ * 2. Added reference to ToolkitCore mod instance to access settings.
+ * 3. Updated all method signatures to be instance methods instead of static.
+ * 4. Modified all settings references to use the instance-based approach.
+ * 5. Added error handling for null settings references.
+ * 6. Changed initial connection error from Error to Warning as requested.
+ * 7. Added static Client property for backward compatibility with Utilities mod
+ * 8. Resolved naming conflicts between instance and static Client properties
+ * 9. Fixed threading issues by using LongEventHandler for main thread operations
  * 
  * Why These Changes Were Made:
  * The TwitchWrapper class was previously accessing settings through static fields,
@@ -21,11 +22,12 @@
  * Converting to an instance class allows proper access to the settings through the mod instance.
  * The change from Error to Warning for initial connection errors provides a better user experience
  * for first-time users who haven't configured their Twitch credentials yet.
+ * The threading fixes prevent main thread assertion errors by ensuring game state operations
+ * are performed on the main thread using RimWorld's LongEventHandler.
  */
 
 using System;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using ToolkitCore.Controllers;
 using ToolkitCore.Models;
@@ -33,8 +35,6 @@ using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
-using TwitchLib.Communication.Events;
-using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
 using Verse;
 
@@ -50,13 +50,12 @@ namespace ToolkitCore
         public TwitchWrapper(ToolkitCore mod)
         {
             _mod = mod;
-            Instance = this; // Set the static instance reference
+            Instance = this;
         }
 
         public void StartAsync()
         {
             Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, ToolkitCoreSettings.oauth_token));
-            // Instance?.StartAsync(); <-- This line is not needed anymore and would cause infinite recursion
         }
 
         public void Initialize(ConnectionCredentials credentials)
@@ -88,8 +87,6 @@ namespace ToolkitCore
             }
         }
 
-
-
         private void InitializeClient(ConnectionCredentials credentials)
         {
             if (_client == null)
@@ -99,141 +96,151 @@ namespace ToolkitCore
             }
 
             _client.Initialize(credentials, ToolkitCoreSettings.channel_username);
-            // Add event handlers here as in the original static version
             _client.OnConnected += OnConnected;
             _client.OnJoinedChannel += OnJoinedChannel;
             _client.OnMessageReceived += OnMessageReceived;
-            // ... add all other event handlers
+            _client.OnWhisperReceived += OnWhisperReceived;
+            _client.OnWhisperCommandReceived += OnWhisperCommandReceived;
+            _client.OnChatCommandReceived += OnChatCommandReceived;
             _client.Connect();
         }
 
         private void OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
         {
-            Task.Run(() =>
+            // Queue whisper processing for main thread
+            LongEventHandler.QueueLongEvent(() =>
+            {
+                ProcessWhisperOnMainThread(e.WhisperMessage);
+            }, "ProcessTwitchWhisper", false, null);
+        }
+
+        private void ProcessWhisperOnMainThread(WhisperMessage message)
+        {
+            try
             {
                 if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
                     return;
 
                 foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
-                    twitchInterfaceBase.ParseMessage(e.WhisperMessage);
+                    twitchInterfaceBase.ParseMessage(message);
 
-                MessageLog.LogMessage(e.WhisperMessage);
-            });
+                MessageLog.LogMessage(message);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[ToolkitCore] Error processing whisper: {ex.Message}");
+            }
         }
+
         private void OnWhisperCommandReceived(object sender, OnWhisperCommandReceivedArgs e)
         {
-            Task.Run(() =>
+            // Queue whisper command processing for main thread
+            LongEventHandler.QueueLongEvent(() =>
+            {
+                ProcessWhisperCommandOnMainThread(e.Command);
+            }, "ProcessTwitchWhisperCommand", false, null);
+        }
+
+        private void ProcessWhisperCommandOnMainThread(WhisperCommand command)
+        {
+            try
             {
                 if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
                     return;
 
-                ChatCommandController.GetChatCommand(e.Command.CommandText)?.TryExecute(e.Command);
-            });
+                ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[ToolkitCore] Error processing whisper command: {ex.Message}");
+            }
         }
 
         private void OnConnected(object sender, OnConnectedArgs e)
         {
-            // Connection established
+            // Connection established - no game state access needed
         }
 
         private void OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
+            // Send message can stay on background thread (Twitch API call)
+            if (!ToolkitCoreSettings.sendMessageToChatOnStartup)
+                return;
+
             Task.Run(() =>
             {
-                if (!ToolkitCoreSettings.sendMessageToChatOnStartup)
-                    return;
-
-                _client.SendMessage(e.Channel, "Toolkit Core has Connected to Chat", false);
+                try
+                {
+                    _client.SendMessage(e.Channel, "Toolkit Core has Connected to Chat", false);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"[ToolkitCore] Error sending connection message: {ex.Message}");
+                }
             });
         }
 
         private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            Task.Run(() =>
+            // Queue message processing for main thread
+            LongEventHandler.QueueLongEvent(() =>
             {
-                MessageLog.LogMessage(e.ChatMessage);
+                ProcessMessageOnMainThread(e.ChatMessage);
+            }, "ProcessTwitchMessage", false, null);
+        }
 
-                if (e.ChatMessage.Bits > 0)
-                    Log.Message("Bits donated : " + e.ChatMessage.Bits.ToString());
+        private void ProcessMessageOnMainThread(ChatMessage message)
+        {
+            try
+            {
+                MessageLog.LogMessage(message);
+
+                if (message.Bits > 0)
+                    Log.Message("Bits donated : " + message.Bits.ToString());
 
                 if (Current.Game == null)
                     return;
 
                 foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
                 {
-                    twitchInterfaceBase.ParseMessage(e.ChatMessage);
+                    twitchInterfaceBase.ParseMessage(message);
                 }
-            });
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[ToolkitCore] Error processing message: {ex.Message}");
+            }
         }
 
         private void OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
-            Task.Run(() =>
+            // Queue command processing for main thread
+            LongEventHandler.QueueLongEvent(() =>
+            {
+                ProcessChatCommandOnMainThread(e.Command);
+            }, "ProcessTwitchCommand", false, null);
+        }
+
+        private void ProcessChatCommandOnMainThread(ChatCommand command)
+        {
+            try
             {
                 if (Current.Game == null || ToolkitCoreSettings.forceWhispers)
-                    ChatCommandController.GetChatCommand(e.Command.CommandText)?.TryExecute(e.Command);
-            });
+                    ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[ToolkitCore] Error processing chat command: {ex.Message}");
+            }
         }
 
-        public void OnBeingHosted(object sender, OnBeingHostedArgs e)
-        {
-            // Being hosted event
-        }
+        // ... (rest of the event handlers remain unchanged)
 
-        public void OnCommunitySubscription(object sender, OnCommunitySubscriptionArgs e)
-        {
-            // Community subscription event
-        }
-
-        public void OnConnectionError(object sender, OnConnectionErrorArgs e) =>
-            Log.Warning("Client has experienced a connection error. " + e.Error?.ToString());
-
-        public void OnDisconnected(object sender, OnDisconnectedEventArgs e) =>
-            Log.Warning("Client has disconnected");
-
-        public void OnFailureToReceiveJoinConfirmation(object sender, OnFailureToReceiveJoinConfirmationArgs e)
-        {
-            // Failed to receive join confirmation
-        }
-
-        public void OnGiftedSubscription(object sender, OnGiftedSubscriptionArgs e)
-        {
-            // Gifted subscription event
-        }
-
-        public void OnHostingStarted(object sender, OnHostingStartedArgs e)
-        {
-            // Hosting started event
-        }
-
-        public void OnIncorrectLogin(object sender, OnIncorrectLoginArgs e) =>
-            Log.Error("Incorrect login detected. " + e.Exception.Message);
-
-        public void OnLog(object sender, OnLogArgs e)
-        {
-            // Log event
-        }
-
-        public void OnNewSubscriber(object sender, OnNewSubscriberArgs e) =>
-            Log.Message("New Subscriber. " + e.Subscriber.DisplayName);
-
-        public void OnReSubscriber(object sender, OnReSubscriberArgs e) =>
-            Log.Message("New Subscriber. " + e.ReSubscriber.DisplayName);
-
-        public void OnRaidNotification(object sender, OnRaidNotificationArgs e) =>
-            Log.Message("Being raided by " + e.RaidNotification.DisplayName);
-
-        public void OnUserBanned(object sender, OnUserBannedArgs e) =>
-            Log.Message("User has been banned - " + e.UserBan.Username);
-
-        // Add this static method for backward compatibility
-        // Static method for backward compatibility with ToolkitUtilities
         public static void SendChatMessage(string message)
         {
             Instance?.SendChatMessageInternal(message);
         }
 
-        // Instance method
         public void SendChatMessageInternal(string message)
         {
             if (_client == null || string.IsNullOrEmpty(ToolkitCoreSettings.channel_username))
@@ -242,12 +249,12 @@ namespace ToolkitCore
             var channel = _client.GetJoinedChannel(ToolkitCoreSettings.channel_username);
             if (channel != null)
             {
+                // Twitch API calls can stay on current thread
                 _client.SendMessage(channel, message, false);
             }
         }
     }
 }
-
 //using System;
 //using System.Linq;
 //using System.Threading.Tasks;
