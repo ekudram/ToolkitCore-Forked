@@ -12,7 +12,7 @@
  * 4. Wrapped Twitch reconnect logic in Task.Run to avoid blocking the UI thread
  * 5. Added null check for TwitchWrapper.Client to prevent potential null reference exceptions
  * 6. Added exception handling around Twitch disconnect to log any errors
- * 7. 
+ * 7. Added message feedback on duplicate viewer removal
  * 
  */
 
