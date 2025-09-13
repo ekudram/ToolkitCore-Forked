@@ -7,6 +7,13 @@
   </supportedVersions>
   <packageId>captolamia.toolkitcore</packageId>
   <description>Base mod for twitch toolkit integration, update experimental 1.6 </description>
+
+  <!-- Add your GitHub URLs here -->
+  <url>https://github.com/ekudram/ToolkitCore-Forked</url>
+  <wikiUrl>https://github.com/ekudram/ToolkitCore-Forked/wiki</wikiUrl>
+  <!-- If you have an issue tracker -->
+  <issueTrackerUrl>https://github.com/ekudram/ToolkitCore-Forked/issues</issueTrackerUrl>
+  
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>

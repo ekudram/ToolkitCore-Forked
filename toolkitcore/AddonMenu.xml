@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+
+  <!-- English (Source Language) -->
   <Settings>Settings</Settings>
   <MessageLog>Message Log</MessageLog>
   <Help>Help</Help>
+  <Reconnect>Reconnect</Reconnect>
+
+  <!-- French (Français) -->
+  <Settings.fr>Paramètres</Settings.fr>
+  <MessageLog.fr>Journal des messages</MessageLog.fr>
+  <Help.fr>Aide</Help.fr>
+  <Reconnect.fr>Reconnecter</Reconnect.fr>
+
+  <!-- German (Deutsch) -->
+  <Settings.de>Einstellungen</Settings.de>
+  <MessageLog.de>Nachrichtenprotokoll</MessageLog.de>
+  <Help.de>Hilfe</Help.de>
+  <Reconnect.de>Erneut verbinden</Reconnect.de>
+
+  <!-- Irish (Gaeilge) -->
+  <Settings.ga>Socruithe</Settings.ga>
+  <MessageLog.ga>Loga Teachtaireachtaí</MessageLog.ga>
+  <Help.ga>Cabhair</Help.ga>
+  <Reconnect.ga>Athcheangail</Reconnect.ga>
+
+  <!-- Japanese (日本語) -->
+  <Settings.ja>設定</Settings.ja>
+  <MessageLog.ja>メッセージログ</MessageLog.ja>
+  <Help.ja>ヘルプ</Help.ja>
+  <Reconnect.ja>再接続</Reconnect.ja>
+
+  <!-- Russian (Русский) -->
+  <Settings.ru>Настройки</Settings.ru>
+  <MessageLog.ru>Журнал сообщений</MessageLog.ru>
+  <Help.ru>Помощь</Help.ru>
+  <Reconnect.ru>Переподключиться</Reconnect.ru>
+
+  <!-- Spanish (Español) -->
+  <Settings.es>Configuración</Settings.es>
+  <MessageLog.es>Registro de mensajes</MessageLog.es>
+  <Help.es>Ayuda</Help.es>
+  <Reconnect.es>Reconectar</Reconnect.es>
+
+  <!-- Scottish Gaelic (Gàidhlig) -->
+  <Settings.gd>Roghainnean</Settings.gd>
+  <MessageLog.gd>Loga nam Teachdaireachdan</MessageLog.gd>
+  <Help.gd>Cobhair</Help.gd>
+  <Reconnect.gd>Ath-cheangail</Reconnect.gd>
+
+  <!-- Welsh (Cymraeg) -->
+  <Settings.cy>Gosodiadau</Settings.cy>
+  <MessageLog.cy>Log Negeseuon</MessageLog.cy>
+  <Help.cy>Help</Help.cy>
+  <Reconnect.cy>Ailgysylltu</Reconnect.cy>
+
+  <!-- Chinese Simplified (简体中文) -->
+  <Settings.zh>设置</Settings.zh>
+  <MessageLog.zh>消息日志</MessageLog.zh>
+  <Help.zh>帮助</Help.zh>
+  <Reconnect.zh>重新连接</Reconnect.zh>
+
 </LanguageData>
