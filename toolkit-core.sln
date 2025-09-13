@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English", "English", "{59D9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Keyed", "Keyed", "{5A208285-A110-4965-BBCD-6E6709F4A78B}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\AddonMenu.xml = ..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\AddonMenu.xml
+		toolkitcore\Lanuages\English\Keyed\AddonMenu.xml = toolkitcore\Lanuages\English\Keyed\AddonMenu.xml
 		..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\ToolkitCoreSettings.xml = ..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\Languages\English\Keyed\ToolkitCoreSettings.xml
 	EndProjectSection
 EndProject

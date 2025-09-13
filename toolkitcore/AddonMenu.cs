@@ -16,9 +16,11 @@
  * 
  */
 
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ToolkitCore.Controllers;
 using ToolkitCore.Interfaces;
 using ToolkitCore.Windows;
 using UnityEngine;
@@ -42,6 +44,11 @@ namespace ToolkitCore
                     Window_MessageLog windowMessageLog = new Window_MessageLog();
                     Find.WindowStack.TryRemove(((object)windowMessageLog).GetType(), true);
                     Find.WindowStack.Add((Window)windowMessageLog);
+                }, MenuOptionPriority.Low),
+                new FloatMenuOption("RemoveDuplicateViewers".Translate(), delegate ()
+                {
+                    int removedCount = ViewerController.RemoveDuplicateViewers();
+                    Messages.Message($"Removed {removedCount} duplicate viewers.", MessageTypeDefOf.TaskCompletion);
                 }, MenuOptionPriority.Low),
                 new FloatMenuOption("Help".Translate(), delegate ()
                 {

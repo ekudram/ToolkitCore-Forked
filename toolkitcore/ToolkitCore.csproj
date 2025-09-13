@@ -125,8 +125,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddonMenu.xml" />
-    <Content Include="Lanuages\English\Keyed\AddonMenu.xml" />
     <Content Include="Lanuages\English\Keyed\ToolkitCoreSettings.xml" />
     <Content Include="Textures\UI\Wiki\TTG_TokenPopup_1.png" />
     <Content Include="Textures\UI\Wiki\TTG_TokenPopup_2.png" />

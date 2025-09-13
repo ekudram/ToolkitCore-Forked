@@ -3,13 +3,16 @@
  * Project: ToolkitCore
  * 
  * Updated: October 26, 2023
+ * Modified Using: DeepSeek AI
  * 
- * Summary:
- * Handles static initialization that runs after all mods have been loaded.
- * Uses RimWorld's StaticConstructorOnStartup attribute for proper initialization timing.
+ * Summary of Changes:
+ * 1. Added automatic duplicate viewer removal on startup
+ * 2. Enhanced initialization logging
+ * 3. Maintained backward compatibility
  */
 
 using RimWorld;
+using ToolkitCore.Controllers;
 using Verse;
 
 namespace ToolkitCore
@@ -33,6 +36,13 @@ namespace ToolkitCore
             // - Check for compatibility with other mods
             // - Register custom handlers that depend on other mods being loaded
             // - Perform final setup that requires all game components to be ready
+
+            // Remove duplicate viewers on startup
+            int removedCount = ViewerController.RemoveDuplicateViewers();
+            if (removedCount > 0)
+            {
+                Log.Message($"[ToolkitCore] Removed {removedCount} duplicate viewers on startup");
+            }
 
             Log.Message("[ToolkitCore] Post-load initialization complete");
         }
