@@ -4,7 +4,9 @@ Modifications:
 
 Duplicate User list check and fix added. Runs once at start. Removes dupicate users in JSON file
 
-Remove Threading outside of Rimworld main thread. Implements and uses Rimworlds Threading. Static calls preserved for use in Toolkit and Utilities.
+Remove Threading outside of Rimworld main thread. Implements and uses Rimworlds Threading.
+
+Static calls preserved for use in Toolkit and Utilities.
 
 Many edits to CS files and additions of translations Some very needed, some just me practicing.
 
