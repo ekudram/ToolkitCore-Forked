@@ -53,9 +53,15 @@ namespace ToolkitCore
             Instance = this;
         }
 
+        public static void StartAsyncStatic()
+        {
+            Instance?.StartAsync();
+        }
+
+
         public void StartAsync()
         {
-            Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, ToolkitCoreSettings.oauth_token));
+            Instance?.Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, ToolkitCoreSettings.oauth_token));
         }
 
         public void Initialize(ConnectionCredentials credentials)
