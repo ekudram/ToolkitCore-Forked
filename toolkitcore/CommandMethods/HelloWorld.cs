@@ -16,7 +16,9 @@
  */
 
 using ToolkitCore.Models;
-using TwitchLib.Client.Interfaces;
+using TwitchLib.Client.Models; // For ChatMessage
+using System.Collections.Generic;
+// Remove the using for TwitchLib.Client.Interfaces
 
 namespace ToolkitCore.CommandMethods
 {
@@ -26,17 +28,50 @@ namespace ToolkitCore.CommandMethods
         {
         }
 
-        public override bool CanExecute(ITwitchCommand twitchCommand) => base.CanExecute(twitchCommand);
-
-        public override void Execute(ITwitchCommand twitchCommand)
+        // Refactored CanExecute to take a ChatMessage
+        public override bool CanExecute(ChatMessage chatMessage)
         {
-            if (ToolkitCore.Instance != null && ToolkitCore.Instance.TwitchWrapper != null)
+            // Implement your permission/validation logic here using chatMessage
+            // e.g., check chatMessage.IsModerator, chatMessage.IsSubscriber, etc.
+            return base.CanExecute(chatMessage); // You'll need to adjust the base method too
+        }
+
+        // Refactored Execute to take a ChatMessage
+        public override void Execute(ChatMessage chatMessage)
+        {
+            if (ToolkitCore.Instance?.TwitchWrapper != null)
             {
                 ToolkitCore.Instance.TwitchWrapper.SendChatMessageInternal("Hello World!");
             }
         }
     }
 }
+
+
+// Second version after the changes:
+
+//namespace ToolkitCore.CommandMethods
+//{
+//    public class HelloWorld : CommandMethod
+//    {
+//        public HelloWorld(ToolkitChatCommand command) : base(command)
+//        {
+//        }
+
+//        public override bool CanExecute(ITwitchCommand twitchCommand) => base.CanExecute(twitchCommand);
+
+//        public override void Execute(ITwitchCommand twitchCommand)
+//        {
+//            if (ToolkitCore.Instance != null && ToolkitCore.Instance.TwitchWrapper != null)
+//            {
+//                ToolkitCore.Instance.TwitchWrapper.SendChatMessageInternal("Hello World!");
+//            }
+//        }
+//    }
+//}
+
+
+// Original version before the changes:
 //using ToolkitCore.Models;
 //using TwitchLib.Client.Interfaces;
 
