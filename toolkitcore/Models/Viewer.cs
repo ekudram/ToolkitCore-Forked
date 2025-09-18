@@ -113,7 +113,7 @@ namespace ToolkitCore.Models
                 DisplayName = chatMessage.DisplayName ?? string.Empty;
                 UserId = chatMessage.UserId ?? string.Empty;
                 IsBroadcaster = chatMessage.IsBroadcaster;
-                IsBot = chatMessage.IsMe;
+                IsBot = chatMessage.IsMe;  // Note: IsMe indicates if the message is from the bot itself
                 IsModerator = chatMessage.IsModerator;
                 IsSubscriber = chatMessage.IsSubscriber;
                 Badges = chatMessage.Badges ?? new List<KeyValuePair<string, string>>();

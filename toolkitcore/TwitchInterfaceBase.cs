@@ -32,6 +32,16 @@ namespace ToolkitCore
         }
 
         public abstract void ParseMessage(ChatMessage chatMessage);
+        // Method for handling whisper messages
+        public abstract void ParseWhisper(WhisperMessage whisperMessage);
+
+        // Optional: Method for handling whisper commands
+        public virtual void ParseWhisperCommand(WhisperCommand whisperCommand)
+        {
+            // Default implementation can be empty
+            // Individual interfaces can override if they need to handle whisper commands
+        }
+
     }
 }
 

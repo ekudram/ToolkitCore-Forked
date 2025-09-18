@@ -17,7 +17,7 @@
 
 using ToolkitCore.Controllers;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models.Interfaces;
+using TwitchLib.Client.Models;
 using Verse;
 
 namespace ToolkitCore.Utilities
@@ -43,7 +43,7 @@ namespace ToolkitCore.Utilities
         /// Parses a Twitch message to update or create viewer information
         /// </summary>
         /// <param name="twitchCommand">The Twitch message to parse</param>
-        public override void ParseMessage(ITwitchMessage twitchCommand)
+        public override void ParseMessage(ChatMessage twitchCommand)
         {
             if (twitchCommand == null)
                 return;
@@ -54,14 +54,25 @@ namespace ToolkitCore.Utilities
                     ? ViewerController.CreateViewer(twitchCommand.Username)
                     : ViewerController.GetViewer(twitchCommand.Username);
 
-                if (viewer == null || twitchCommand.ChatMessage == null)
+                if (viewer == null || twitchCommand.Message == null)
                     return;
 
-                viewer.UpdateViewerFromMessage(twitchCommand.ChatMessage);
+                viewer.UpdateViewerFromMessage(twitchCommand);
             }
             catch (System.Exception ex)
             {
                 Log.Error($"[ViewerInterface] Error parsing message: {ex.Message}");
+            }
+        }
+        public void UpdateViewerFromTwitchMessage(ITwitchMessage twitchMessage)
+        {
+            if (twitchMessage is ChatMessage chatMessage)
+            {
+                UpdateViewerFromMessage(chatMessage);
+            }
+            else if (twitchMessage is WhisperMessage whisperMessage)
+            {
+                UpdateViewerFromWhisper(whisperMessage);
             }
         }
     }

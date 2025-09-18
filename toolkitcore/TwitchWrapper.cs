@@ -128,7 +128,7 @@ namespace ToolkitCore
                     return;
 
                 foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
-                    twitchInterfaceBase.ParseMessage(message);
+                    twitchInterfaceBase.ParseWhisper(message); // Changed from ParseMessage
 
                 MessageLog.LogMessage(message);
             }
@@ -154,7 +154,12 @@ namespace ToolkitCore
                 if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
                     return;
 
-                ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command);
+                // Option 1: Use the new ParseWhisperCommand method
+                foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
+                    twitchInterfaceBase.ParseWhisperCommand(command);
+
+                // Option 2: Keep using ChatCommandController (if you prefer this approach)
+                // ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command);
             }
             catch (Exception ex)
             {
