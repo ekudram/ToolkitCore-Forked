@@ -14,7 +14,7 @@
  * The base GameComponent class only has a default constructor, so we must use that.
  */
 
-using TwitchLib.Client.Models.Interfaces;
+using TwitchLib.Client.Models;
 using Verse;
 
 namespace ToolkitCore
@@ -31,7 +31,7 @@ namespace ToolkitCore
             // This empty constructor with game parameter might be needed
         }
 
-        public abstract void ParseMessage(ITwitchMessage twitchMessage);
+        public abstract void ParseMessage(ChatMessage chatMessage);
     }
 }
 
