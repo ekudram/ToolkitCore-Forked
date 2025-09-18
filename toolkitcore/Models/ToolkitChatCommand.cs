@@ -1,5 +1,6 @@
 ﻿using System;
 using TwitchLib.Client.Interfaces;
+using TwitchLib.Client.Models;
 using Verse;
 
 namespace ToolkitCore.Models
@@ -12,7 +13,7 @@ namespace ToolkitCore.Models
         public bool requiresMod;
         public bool requiresBroadcaster;
 
-        public bool TryExecute(ITwitchCommand twitchCommand)
+        public bool TryExecute(ChatMessage twitchCommand)
         {
             try
             {
