@@ -226,7 +226,7 @@ namespace ToolkitCore
                 {
                     try
                     {
-                        _mod.TwitchWrapper.StartAsync();
+                        _mod.TwitchWrapper.StartAsyncInstance();
                     }
                     catch (Exception ex)
                     {

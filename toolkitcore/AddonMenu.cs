@@ -69,7 +69,7 @@ namespace ToolkitCore
                             }
                             
                             // Start a new connection
-                            LoadedModManager.GetMod<ToolkitCore>().TwitchWrapper.StartAsync();
+                            LoadedModManager.GetMod<ToolkitCore>().TwitchWrapper.StartAsyncInstance();
                         }
                         catch (Exception ex)
                         {

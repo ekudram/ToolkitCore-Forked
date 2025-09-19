@@ -54,7 +54,7 @@ namespace ToolkitCore.Windows
                     }
                     else
                     {
-                        ToolkitCore.Instance.TwitchWrapper.StartAsync();
+                        ToolkitCore.Instance.TwitchWrapper.StartAsyncInstance();
                     }
                 }
             }
@@ -62,7 +62,7 @@ namespace ToolkitCore.Windows
             {
                 if (ToolkitCore.Instance != null)
                 {
-                    ToolkitCore.Instance.TwitchWrapper.StartAsync();
+                    ToolkitCore.Instance.TwitchWrapper.StartAsyncInstance();
                 }
             }
 

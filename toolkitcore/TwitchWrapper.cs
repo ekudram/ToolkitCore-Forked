@@ -3,18 +3,20 @@
  * Project: ToolkitCore
  * 
  * Updated: [Current Date]
- * Modified Using: DeepSeek AI
  * 
  * Summary of Changes:
- * 1. Converted from static class to instance class to properly access instance-based settings.
- * 2. Added reference to ToolkitCore mod instance to access settings.
- * 3. Updated all method signatures to be instance methods instead of static.
- * 4. Modified all settings references to use the instance-based approach.
- * 5. Added error handling for null settings references.
- * 6. Changed initial connection error from Error to Warning as requested.
+ * 1. Converted from static class to instance class to properly access instance-based settings
+ * 2. Added reference to ToolkitCore mod instance to access settings
+ * 3. Updated all method signatures to be instance methods instead of static
+ * 4. Modified all settings references to use the instance-based approach
+ * 5. Added error handling for null settings references
+ * 6. Changed initial connection error from Error to Warning as requested
  * 7. Added static Client property for backward compatibility with Utilities mod
  * 8. Resolved naming conflicts between instance and static Client properties
  * 9. Fixed threading issues by using LongEventHandler for main thread operations
+ * 10. Fixed ClientOptions compatibility with newer TwitchLib version
+ * 11. Added proper rate limiting for message sending
+ * 12. Replaced Task.Run with LongEventHandler for RimWorld compatibility
  * 
  * Why These Changes Were Made:
  * The TwitchWrapper class was previously accessing settings through static fields,
@@ -45,6 +47,8 @@ namespace ToolkitCore
         private readonly ToolkitCore _mod;
         private static TwitchWrapper Instance;
         private TwitchClient _client;
+
+        // Public static property for backward compatibility
         public static TwitchClient Client => Instance?._client;
 
         // For rate limiting
@@ -57,15 +61,21 @@ namespace ToolkitCore
             Instance = this;
         }
 
-        public static void StartAsyncStatic()
+        // Static methods for backward compatibility with external mods
+        public static void StartAsync()
         {
-            Instance?.StartAsync();
+            Instance?.StartAsyncInstance();
         }
 
-
-        public void StartAsync()
+        public static void SendChatMessage(string message)
         {
-            Instance?.Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, ToolkitCoreSettings.oauth_token));
+            Instance?.SendChatMessageInternal(message);
+        }
+
+        // Instance methods (implementation)
+        public void StartAsyncInstance()
+        {
+            Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, ToolkitCoreSettings.oauth_token));
         }
 
         public void Initialize(ConnectionCredentials credentials)
@@ -128,7 +138,7 @@ namespace ToolkitCore
                     return;
 
                 foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
-                    twitchInterfaceBase.ParseWhisper(message); // Changed from ParseMessage
+                    twitchInterfaceBase.ParseWhisper(message);
 
                 MessageLog.LogMessage(message);
             }
@@ -154,12 +164,8 @@ namespace ToolkitCore
                 if (Current.Game == null || !ToolkitCoreSettings.allowWhispers)
                     return;
 
-                // Option 1: Use the new ParseWhisperCommand method
                 foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
                     twitchInterfaceBase.ParseWhisperCommand(command);
-
-                // Option 2: Keep using ChatCommandController (if you prefer this approach)
-                // ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command);
             }
             catch (Exception ex)
             {
@@ -174,11 +180,11 @@ namespace ToolkitCore
 
         private void OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
-            // Send message can stay on background thread (Twitch API call)
+            // Use RimWorld's LongEventHandler instead of Task.Run for thread safety
             if (!ToolkitCoreSettings.sendMessageToChatOnStartup)
                 return;
 
-            Task.Run(() =>
+            LongEventHandler.QueueLongEvent(() =>
             {
                 try
                 {
@@ -188,7 +194,7 @@ namespace ToolkitCore
                 {
                     Log.Error($"[ToolkitCore] Error sending connection message: {ex.Message}");
                 }
-            });
+            }, "SendTwitchConnectionMessage", false, null);
         }
 
         private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
@@ -255,13 +261,6 @@ namespace ToolkitCore
             }
         }
 
-        // ... (rest of the event handlers remain unchanged)
-
-        public static void SendChatMessage(string message)
-        {
-            Instance?.SendChatMessageInternal(message);
-        }
-
         public void SendChatMessageInternal(string message)
         {
             if (_client == null || string.IsNullOrEmpty(ToolkitCoreSettings.channel_username))
@@ -279,13 +278,11 @@ namespace ToolkitCore
             var channel = _client.GetJoinedChannel(ToolkitCoreSettings.channel_username);
             if (channel != null)
             {
-                // Twitch API calls can stay on current thread
                 _client.SendMessage(channel, message, false);
             }
         }
     }
-}
-//using System;
+}//using System;
 //using System.Linq;
 //using System.Threading.Tasks;
 //using ToolkitCore.Controllers;

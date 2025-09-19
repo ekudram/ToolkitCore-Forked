@@ -60,7 +60,7 @@ namespace ToolkitCore
             {
                 try
                 {
-                    _twitchWrapper.StartAsync();
+                    _twitchWrapper.StartAsyncInstance();
                 }
                 catch (System.Exception ex)
                 {
