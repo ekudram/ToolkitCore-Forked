@@ -152,14 +152,22 @@ namespace ToolkitCore
         /// <summary>
         /// Renders a password field with show/hide functionality
         /// </summary>
+        /// <summary>
+        /// Renders a password field with show/hide functionality
+        /// </summary>
         private void RenderPasswordField(Rect fieldRect, ref string value)
         {
             if (showOauth)
             {
-                value = Widgets.TextField(fieldRect, value);
-                if (Widgets.ButtonText(new Rect(fieldRect.x + fieldRect.width + 10f, fieldRect.y, 60f, verticalHeight), "Hide".Translate(), true, true, true))
+                string newValue = Widgets.TextField(fieldRect, value);
+                if (newValue != value)
                 {
-                    showOauth = false;
+                    // Ensure the token has the "oauth:" prefix
+                    if (!string.IsNullOrEmpty(newValue) && !newValue.StartsWith("oauth:"))
+                    {
+                        newValue = "oauth:" + newValue;
+                    }
+                    value = newValue;
                 }
             }
             else
@@ -179,7 +187,13 @@ namespace ToolkitCore
 
             if (Widgets.ButtonText(new Rect(fieldRect.x, fieldRect.y + verticalSpacing, 200f, verticalHeight), "PasteFromClipboard".Translate(), true, true, true))
             {
-                value = GUIUtility.systemCopyBuffer;
+                string clipboardValue = GUIUtility.systemCopyBuffer;
+                // Ensure pasted token has the "oauth:" prefix
+                if (!string.IsNullOrEmpty(clipboardValue) && !clipboardValue.StartsWith("oauth:"))
+                {
+                    clipboardValue = "oauth:" + clipboardValue;
+                }
+                value = clipboardValue;
             }
         }
 
@@ -267,6 +281,11 @@ namespace ToolkitCore
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
+                // Ensure token has proper format after loading
+                if (!string.IsNullOrEmpty(_oauth_token) && !_oauth_token.StartsWith("oauth:"))
+                {
+                    _oauth_token = "oauth:" + _oauth_token;
+                }
                 SyncStaticFields();
             }
         }

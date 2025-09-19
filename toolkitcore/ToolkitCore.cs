@@ -69,7 +69,9 @@ namespace ToolkitCore
             }
         }
     }
-}//using UnityEngine;
+}
+
+//using UnityEngine;
 //using Verse;
 
 //namespace ToolkitCore
