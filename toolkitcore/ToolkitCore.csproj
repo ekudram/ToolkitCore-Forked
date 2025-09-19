@@ -72,6 +72,7 @@
     <Compile Include="Models\ToolkitAddon.cs" />
     <Compile Include="Models\ToolkitChatCommand.cs" />
     <Compile Include="Models\CommandMethod.cs" />
+    <Compile Include="ToolkitCoreLogger.cs" />
     <Compile Include="ToolkitData.cs" />
     <Compile Include="TwitchWrapper.cs" />
     <Compile Include="ToolkitCore.cs" />
