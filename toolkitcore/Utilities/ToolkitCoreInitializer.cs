@@ -23,7 +23,7 @@ namespace ToolkitCore
         static ToolkitCoreInitializer()
         {
             // This code runs after all mods have been loaded and initialized
-            ToolkitCoreLogger.Message("[ToolkitCore] Initializing after all mods have loaded...");
+            ToolkitCoreLogger.Message("Initializing after all mods have loaded...");
 
             // Perform any initialization that requires other mods to be fully loaded
             InitializeAfterAllModsLoaded();
@@ -37,7 +37,7 @@ namespace ToolkitCore
             // - Register custom handlers that depend on other mods being loaded
             // - Perform final setup that requires all game components to be ready
 
-            ToolkitCoreLogger.Message("[ToolkitCore] Post-load initialization complete");
+            ToolkitCoreLogger.Message("Post-load initialization complete");
         }
     }
 }

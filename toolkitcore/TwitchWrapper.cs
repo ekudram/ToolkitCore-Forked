@@ -120,7 +120,7 @@ namespace ToolkitCore
         public void StartAsyncInstance()
         {
             // Debug logging to help troubleshoot
-            ToolkitCoreLogger.Message($"[ToolkitCore Debug] Token before validation: '{ToolkitCoreSettings.oauth_token}'");
+            //ToolkitCoreLogger.Debug($"[ToolkitCore Debug] Token before validation: '{ToolkitCoreSettings.oauth_token}'");
 
             if (string.IsNullOrEmpty(ToolkitCoreSettings.oauth_token) ||
                 string.IsNullOrEmpty(ToolkitCoreSettings.bot_username))
@@ -147,7 +147,7 @@ namespace ToolkitCore
                 return;
             }
 
-            ToolkitCoreLogger.Message($"[ToolkitCore Debug] Token after validation: '{formattedToken}'");
+            // ToolkitCoreLogger.Debug($"[ToolkitCore Debug] Token after validation: '{formattedToken}'");
 
             Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, formattedToken));
         }

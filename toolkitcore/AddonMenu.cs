@@ -72,7 +72,7 @@ namespace ToolkitCore
                             // Optional: Log to RimWorld's main thread if needed
                             LongEventHandler.ExecuteWhenFinished(delegate
                             {
-                                Log.Warning($"Twitch reconnection failed: {ex.Message}");
+                                ToolkitCoreLogger.Warning($"Twitch reconnection failed: {ex.Message}");
                             });
                         }
                     }, "ToolkitCore_Reconnect", false, null);
