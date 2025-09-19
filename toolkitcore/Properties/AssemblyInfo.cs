@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("toolkit-core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Core mod for use with TwitchToolkit.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("toolkit-core")]
