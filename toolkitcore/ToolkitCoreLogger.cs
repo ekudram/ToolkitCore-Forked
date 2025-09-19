@@ -20,7 +20,7 @@ namespace ToolkitCore
             Verse.Log.Message($"{Prefix} {message}");
         }
 
-        public static void Warn(string message)
+        public static void Warning(string message)
         {
             Verse.Log.Warning($"{Prefix} <color=#FFFF00>{message}</color>");
         }
@@ -30,7 +30,7 @@ namespace ToolkitCore
             Verse.Log.Error($"{Prefix} <color=#FF0000>{message}</color>");
         }
 
-        public static void Success(string message)
+        public static void Message(string message)
         {
             Verse.Log.Message($"{Prefix} <color=#00FF00>{message}</color>");
         }

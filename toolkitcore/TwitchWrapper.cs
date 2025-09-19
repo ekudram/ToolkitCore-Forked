@@ -75,57 +75,57 @@ namespace ToolkitCore
         }
         public static void OnConnectionError(object sender, OnConnectionErrorArgs e)
         {
-            Log.Error("Client has experienced a connection error. " + e.Error?.ToString());
+            ToolkitCoreLogger.Error("Client has experienced a connection error. " + e.Error?.ToString());
         }
 
         public static void OnDisconnected(object sender, OnDisconnectedEventArgs e)
         {
-            Log.Warning("Client has disconnected");
+            ToolkitCoreLogger.Warning("Client has disconnected");
         }
 
         public static void OnNewSubscriber(object sender, OnNewSubscriberArgs e)
         {
-            Log.Message("New Subscriber. " + e.Subscriber.DisplayName);
+            ToolkitCoreLogger.Message("New Subscriber. " + e.Subscriber.DisplayName);
         }
 
         public static void OnReSubscriber(object sender, OnReSubscriberArgs e)
         {
-            Log.Message("New Subscriber. " + e.ReSubscriber.DisplayName);
+            ToolkitCoreLogger.Message("Resub Subscriber. " + e.ReSubscriber.DisplayName);
         }
 
         public static void OnRaidNotification(object sender, OnRaidNotificationArgs e)
         {
-            Log.Message("Being raided by " + e.RaidNotification.DisplayName);
+            ToolkitCoreLogger.Message("Being raided by " + e.RaidNotification.DisplayName);
         }
 
         public static void OnUserBanned(object sender, OnUserBannedArgs e)
         {
-            Log.Message("User has been banned - " + e.UserBan.Username);
+            ToolkitCoreLogger.Message("User has been banned - " + e.UserBan.Username);
         }
         public static void OnGiftedSubscription(object sender, OnGiftedSubscriptionArgs e)
         {
-            Log.Message("Gifted Subscription. " + e.GiftedSubscription.DisplayName);
+            ToolkitCoreLogger.Message("Gifted Subscription. " + e.GiftedSubscription.DisplayName);
         }
         public static void OnUserJoined(object sender, OnUserJoinedArgs e)
         {
-            Log.Message($"User joined: {e.Username}");
+            ToolkitCoreLogger.Message($"User joined: {e.Username}");
             // Additional logic for mods to hook into
         }
         public static void OnUserLeft(object sender, OnUserLeftArgs e)
         {
-            Log.Message($"User left: {e.Username}");
+            ToolkitCoreLogger.Message($"User left: {e.Username}");
             // Additional logic for mods to hook into
         }
         // Instance methods (implementation)
         public void StartAsyncInstance()
         {
             // Debug logging to help troubleshoot
-            Log.Message($"[ToolkitCore Debug] Token before validation: '{ToolkitCoreSettings.oauth_token}'");
+            ToolkitCoreLogger.Message($"[ToolkitCore Debug] Token before validation: '{ToolkitCoreSettings.oauth_token}'");
 
             if (string.IsNullOrEmpty(ToolkitCoreSettings.oauth_token) ||
                 string.IsNullOrEmpty(ToolkitCoreSettings.bot_username))
             {
-                Log.Error("[ToolkitCore] Missing Twitch credentials. Please check your settings.");
+                ToolkitCoreLogger.Error("[ToolkitCore] Missing Twitch credentials. Please check your settings.");
                 return;
             }
 
@@ -134,7 +134,7 @@ namespace ToolkitCore
             if (!formattedToken.StartsWith("oauth:"))
             {
                 formattedToken = "oauth:" + formattedToken;
-                Log.Warning("[ToolkitCore] Auto-corrected token format by adding 'oauth:' prefix");
+                ToolkitCoreLogger.Warning("[ToolkitCore] Auto-corrected token format by adding 'oauth:' prefix");
 
                 // Update the settings with the corrected token
                 ToolkitCoreSettings.oauth_token = formattedToken;
@@ -143,11 +143,11 @@ namespace ToolkitCore
             // Additional validation - check token length
             if (formattedToken.Length < 30) // oauth: + at least 24 characters
             {
-                Log.Error("[ToolkitCore] Token appears to be too short. Please check your token.");
+                ToolkitCoreLogger.Error("[ToolkitCore] Token appears to be too short. Please check your token.");
                 return;
             }
 
-            Log.Message($"[ToolkitCore Debug] Token after validation: '{formattedToken}'");
+            ToolkitCoreLogger.Message($"[ToolkitCore Debug] Token after validation: '{formattedToken}'");
 
             Initialize(new ConnectionCredentials(ToolkitCoreSettings.bot_username, formattedToken));
         }
@@ -170,10 +170,10 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                Log.Warning($"Error resetting Twitch client: {ex.Message}");
+                ToolkitCoreLogger.Warning($"Error resetting Twitch client: {ex.Message}");
                 if (ex.InnerException != null)
                 {
-                    Log.Warning($"Inner exception: {ex.InnerException.Message}");
+                    ToolkitCoreLogger.Warning($"Inner exception: {ex.InnerException.Message}");
                 }
             }
         }
@@ -192,7 +192,7 @@ namespace ToolkitCore
         {
             if (_client == null)
             {
-                Log.Error("Tried to initialize null client, report to mod author");
+                ToolkitCoreLogger.Error("Tried to initialize null client, report to mod author");
                 return;
             }
 
@@ -225,7 +225,7 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error initializing Twitch client: {ex.Message}");
+                ToolkitCoreLogger.Error($"[ToolkitCore] Error initializing Twitch client: {ex.Message}");
                 // Handle reconnection or notify user
             }
         }
@@ -237,7 +237,7 @@ namespace ToolkitCore
 
         private void OnChatCleared(object sender, OnChatClearedArgs e)
         {
-            Log.Message("[ToolkitCore] Chat was cleared");
+            ToolkitCoreLogger.Message("[ToolkitCore] Chat was cleared");
         }
 
         private void OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
@@ -263,7 +263,7 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error processing whisper: {ex.Message}");
+                ToolkitCoreLogger.Error($"[ToolkitCore] Error processing whisper: {ex.Message}");
             }
         }
 
@@ -288,7 +288,7 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error processing whisper command: {ex.Message}");
+                ToolkitCoreLogger.Error($"[ToolkitCore] Error processing whisper command: {ex.Message}");
             }
         }
 
@@ -311,7 +311,7 @@ namespace ToolkitCore
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ToolkitCore] Error sending connection message: {ex.Message}");
+                    ToolkitCoreLogger.Error($"[ToolkitCore] Error sending connection message: {ex.Message}");
                 }
             }, "SendTwitchConnectionMessage", false, null);
         }
@@ -332,7 +332,7 @@ namespace ToolkitCore
                 MessageLog.LogMessage(message);
 
                 if (message.Bits > 0)
-                    Log.Message("Bits donated : " + message.Bits.ToString());
+                    ToolkitCoreLogger.Message("Bits donated : " + message.Bits.ToString());
 
                 if (Current.Game == null)
                     return;
@@ -344,7 +344,7 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error processing message: {ex.Message}");
+                ToolkitCoreLogger.Error($"[ToolkitCore] Error processing message: {ex.Message}");
             }
         }
 
@@ -371,12 +371,12 @@ namespace ToolkitCore
                 }
                 else
                 {
-                    Log.Warning("[ToolkitCore] ChatCommand does not contain a ChatMessage reference");
+                    ToolkitCoreLogger.Warning("[ToolkitCore] ChatCommand does not contain a ChatMessage reference");
                 }
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error processing chat command: {ex.Message}");
+                ToolkitCoreLogger.Error($"[ToolkitCore] Error processing chat command: {ex.Message}");
             }
         }
 

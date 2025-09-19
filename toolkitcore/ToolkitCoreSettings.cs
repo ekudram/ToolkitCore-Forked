@@ -236,7 +236,7 @@ namespace ToolkitCore
                     }
                     catch (Exception ex)
                     {
-                        Log.Error($"[ToolkitCore] Error disconnecting: {ex.Message}");
+                        ToolkitCoreLogger.Error($"[ToolkitCore] Error disconnecting: {ex.Message}");
                     }
                 }
             }
@@ -251,7 +251,7 @@ namespace ToolkitCore
                     }
                     catch (Exception ex)
                     {
-                        Log.Error($"[ToolkitCore] Error connecting: {ex.Message}");
+                        ToolkitCoreLogger.Error($"[ToolkitCore] Error connecting: {ex.Message}");
                     }
                 }
             }
