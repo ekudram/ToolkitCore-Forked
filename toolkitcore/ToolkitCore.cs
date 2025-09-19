@@ -30,12 +30,17 @@ namespace ToolkitCore
         public static ToolkitCore Instance { get; private set; }
         public static ToolkitCoreSettings settings;
         private TwitchWrapper _twitchWrapper;
-        public ToolkitCoreSettings Settings { get; } // This property needs to be initialized
+        public ToolkitCoreSettings Settings { get; }
 
         public ToolkitCore(ModContentPack content) : base(content)
         {
+            Instance = this;
+
             // Initialize the Settings property first
             Settings = GetSettings<ToolkitCoreSettings>();
+
+            // Set the mod instance in settings
+            Settings.SetMod(this);
 
             // Then set the static field for backward compatibility
             ToolkitCore.settings = Settings;
