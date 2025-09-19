@@ -47,6 +47,10 @@ namespace ToolkitCore
         private TwitchClient _client;
         public static TwitchClient Client => Instance?._client;
 
+        // For rate limiting
+        private DateTime _lastMessageTime = DateTime.MinValue;
+        private readonly TimeSpan _messageDelay = TimeSpan.FromMilliseconds(100);
+
         public TwitchWrapper(ToolkitCore mod)
         {
             _mod = mod;
@@ -77,11 +81,7 @@ namespace ToolkitCore
                 if (_client != null && _client.IsConnected)
                     _client.Disconnect();
 
-                _client = new TwitchClient(new WebSocketClient(new ClientOptions()
-                {
-                    MessagesAllowedInPeriod = 750,
-                    ThrottlingPeriod = TimeSpan.FromSeconds(30.0)
-                }));
+                _client = new TwitchClient(new WebSocketClient(new ClientOptions()));
             }
             catch (Exception ex)
             {
@@ -266,6 +266,15 @@ namespace ToolkitCore
         {
             if (_client == null || string.IsNullOrEmpty(ToolkitCoreSettings.channel_username))
                 return;
+
+            // Simple rate limiting
+            var now = DateTime.Now;
+            if (now - _lastMessageTime < _messageDelay)
+            {
+                Task.Delay(_messageDelay - (now - _lastMessageTime)).Wait();
+            }
+
+            _lastMessageTime = DateTime.Now;
 
             var channel = _client.GetJoinedChannel(ToolkitCoreSettings.channel_username);
             if (channel != null)
