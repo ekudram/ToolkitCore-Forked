@@ -69,7 +69,7 @@ namespace ToolkitCore
                 }
                 catch (System.Exception ex)
                 {
-                    Log.Warning($"[ToolkitCore] Failed to connect to Twitch on startup: {ex.Message}");
+                    ToolkitCoreLogger.Warning($"Failed to connect to Twitch on startup: {ex.Message}");
                 }
             }
         }

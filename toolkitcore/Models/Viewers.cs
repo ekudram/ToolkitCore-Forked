@@ -38,14 +38,14 @@ namespace ToolkitCore.Models
                         // Ensure global database exists
                         if (ToolkitData.globalDatabase == null)
                         {
-                            Log.Warning("[ToolkitCore] Global database was null. Recreating...");
+                            ToolkitCoreLogger.Warning("Global database was null. Recreating...");
                             ToolkitData.globalDatabase = new GlobalDatabase();
                         }
 
                         // Ensure viewers list exists
                         if (ToolkitData.globalDatabase.viewers == null)
                         {
-                            Log.Warning("[ToolkitCore] Viewer list was null. Recreating...");
+                            ToolkitCoreLogger.Warning("Viewer list was null. Recreating...");
                             ToolkitData.globalDatabase.viewers = new List<Viewer>();
                         }
 
@@ -53,7 +53,7 @@ namespace ToolkitCore.Models
                     }
                     catch (Exception ex)
                     {
-                        Log.Error($"[ToolkitCore] Critical error accessing viewer database: {ex.Message}");
+                        ToolkitCoreLogger.Error($"Critical error accessing viewer database: {ex.Message}");
                         return new List<Viewer>(); // Return empty list instead of crashing
                     }
                 }
@@ -67,7 +67,7 @@ namespace ToolkitCore.Models
         {
             if (viewer == null)
             {
-                Log.Warning("[ToolkitCore] Attempted to add null viewer");
+                ToolkitCoreLogger.Warning("Attempted to add null viewer");
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace ToolkitCore.Models
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ToolkitCore] Error adding viewer {viewer.Username}: {ex.Message}");
+                    ToolkitCoreLogger.Error($"Error adding viewer {viewer.Username}: {ex.Message}");
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace ToolkitCore.Models
         {
             if (string.IsNullOrEmpty(username))
             {
-                Log.Warning("[ToolkitCore] Attempted to find viewer with null/empty username");
+                ToolkitCoreLogger.Warning("Attempted to find viewer with null/empty username");
                 return null;
             }
 
@@ -111,20 +111,10 @@ namespace ToolkitCore.Models
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ToolkitCore] Error finding viewer {username}: {ex.Message}");
+                    ToolkitCoreLogger.Error($"Error finding viewer {username}: {ex.Message}");
                     return null;
                 }
             }
         }
     }
 }
-
-//using System.Collections.Generic;
-
-//namespace ToolkitCore.Models
-//{
-//    public static class Viewers
-//    {
-//        public static List<Viewer> All => ToolkitData.globalDatabase.viewers;
-//    }
-//}

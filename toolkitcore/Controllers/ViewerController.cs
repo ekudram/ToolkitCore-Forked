@@ -38,7 +38,7 @@ namespace ToolkitCore.Controllers
         {
             if (string.IsNullOrEmpty(username))
             {
-                Log.Error("[ToolkitCore] Attempted to create viewer with null or empty username");
+                ToolkitCoreLogger.Error("Attempted to create viewer with null or empty username");
                 throw new ArgumentNullException(nameof(username), "Username cannot be null or empty");
             }
 
@@ -48,19 +48,19 @@ namespace ToolkitCore.Controllers
                 {
                     if (ViewerExists(username))
                     {
-                        Log.Warning($"[ToolkitCore] Attempted to create duplicate viewer: {username}");
+                        ToolkitCoreLogger.Warning($"Attempted to create duplicate viewer: {username}");
                         throw new InvalidOperationException($"Viewer '{username}' already exists");
                     }
 
                     Viewer viewer = new Viewer(username);
                     Viewers.AddViewer(viewer);
 
-                    Log.Message($"[ToolkitCore] Created new viewer: {username}");
+                    ToolkitCoreLogger.Message($"Created new viewer: {username}");
                     return viewer;
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ToolkitCore] Error creating viewer {username}: {ex.Message}");
+                    ToolkitCoreLogger.Error($"Error creating viewer {username}: {ex.Message}");
                     throw;
                 }
             }
@@ -75,7 +75,7 @@ namespace ToolkitCore.Controllers
         {
             if (string.IsNullOrEmpty(username))
             {
-                Log.Warning("[ToolkitCore] Attempted to get viewer with null or empty username");
+                ToolkitCoreLogger.Warning("Attempted to get viewer with null or empty username");
                 return null;
             }
 
@@ -89,7 +89,7 @@ namespace ToolkitCore.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error getting viewer {username}: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error getting viewer {username}: {ex.Message}");
                 return null;
             }
         }
@@ -103,7 +103,7 @@ namespace ToolkitCore.Controllers
         {
             if (string.IsNullOrEmpty(username))
             {
-                Log.Warning("[ToolkitCore] Attempted to check existence of viewer with null or empty username");
+                ToolkitCoreLogger.Warning("Attempted to check existence of viewer with null or empty username");
                 return false;
             }
 
@@ -113,63 +113,12 @@ namespace ToolkitCore.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error checking if viewer exists {username}: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error checking if viewer exists {username}: {ex.Message}");
                 return false;
             }
         }
 
-        /// <summary>
-        /// Removes duplicate viewers based on username (case-insensitive)
-        /// </summary>
-        /// <returns>The number of duplicates removed</returns>
-        public static int RemoveDuplicateViewers()
-        {
-            lock (_lock)
-            {
-                try
-                {
-                    var viewers = Viewers.All;
-                    if (viewers == null || viewers.Count == 0)
-                        return 0;
-
-                    var uniqueViewers = new Dictionary<string, Viewer>(StringComparer.OrdinalIgnoreCase);
-                    var duplicates = new List<Viewer>();
-
-                    foreach (var viewer in viewers)
-                    {
-                        if (viewer == null || string.IsNullOrEmpty(viewer.Username))
-                            continue;
-
-                        if (uniqueViewers.ContainsKey(viewer.Username))
-                        {
-                            duplicates.Add(viewer);
-                        }
-                        else
-                        {
-                            uniqueViewers[viewer.Username] = viewer;
-                        }
-                    }
-
-                    // Remove duplicates
-                    foreach (var duplicate in duplicates)
-                    {
-                        viewers.Remove(duplicate);
-                    }
-
-                    if (duplicates.Count > 0)
-                    {
-                        Log.Message($"[ToolkitCore] Removed {duplicates.Count} duplicate viewers");
-                    }
-
-                    return duplicates.Count;
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"[ToolkitCore] Error removing duplicate viewers: {ex.Message}");
-                    return 0;
-                }
-            }
-        }
+              
 
         /// <summary>
         /// Gets or creates a viewer by username (thread-safe)
@@ -180,7 +129,7 @@ namespace ToolkitCore.Controllers
         {
             if (string.IsNullOrEmpty(username))
             {
-                Log.Error("[ToolkitCore] Attempted to get or create viewer with null or empty username");
+                ToolkitCoreLogger.Error("Attempted to get or create viewer with null or empty username");
                 return null;
             }
 
@@ -196,7 +145,7 @@ namespace ToolkitCore.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ToolkitCore] Error getting or creating viewer {username}: {ex.Message}");
+                    ToolkitCoreLogger.Error($"Error getting or creating viewer {username}: {ex.Message}");
                     return null;
                 }
             }
@@ -212,7 +161,7 @@ namespace ToolkitCore.Controllers
         {
             if (string.IsNullOrEmpty(username) || updateAction == null)
             {
-                Log.Warning("[ToolkitCore] Invalid parameters for UpdateViewer");
+                ToolkitCoreLogger.Warning("Invalid parameters for UpdateViewer");
                 return false;
             }
 
@@ -229,30 +178,10 @@ namespace ToolkitCore.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ToolkitCore] Error updating viewer {username}: {ex.Message}");
+                    ToolkitCoreLogger.Error($"Error updating viewer {username}: {ex.Message}");
                     return false;
                 }
             }
         }
     }
 }
-
-//using System;
-//using ToolkitCore.Models;
-
-//namespace ToolkitCore.Controllers
-//{
-//    public static class ViewerController
-//    {
-//        public static Viewer CreateViewer(string Username)
-//        {
-//            Viewer viewer = !ViewerExists(Username) ? new Viewer(Username) : throw new Exception("Viewer already exists");
-//            Viewers.All.Add(viewer);
-//            return viewer;
-//        }
-
-//        public static Viewer GetViewer(string Username) => Viewers.All.Find((Predicate<Viewer>)(vwr => vwr.Username == Username));
-
-//        public static bool ViewerExists(string Username) => Viewers.All.Find((Predicate<Viewer>)(x => x.Username == Username)) != null;
-//    }
-//}

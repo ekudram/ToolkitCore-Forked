@@ -222,7 +222,7 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error checking connection status: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error checking connection status: {ex.Message}");
             }
 
             if (isConnected)
@@ -236,7 +236,7 @@ namespace ToolkitCore
                     }
                     catch (Exception ex)
                     {
-                        ToolkitCoreLogger.Error($"[ToolkitCore] Error disconnecting: {ex.Message}");
+                        ToolkitCoreLogger.Error($"Error disconnecting: {ex.Message}");
                     }
                 }
             }
@@ -251,7 +251,7 @@ namespace ToolkitCore
                     }
                     catch (Exception ex)
                     {
-                        ToolkitCoreLogger.Error($"[ToolkitCore] Error connecting: {ex.Message}");
+                        ToolkitCoreLogger.Error($"Error connecting: {ex.Message}");
                     }
                 }
             }

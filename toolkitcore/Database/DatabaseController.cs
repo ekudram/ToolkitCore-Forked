@@ -42,12 +42,12 @@ namespace ToolkitCore.Database
                 if (!Directory.Exists(dataPath))
                 {
                     Directory.CreateDirectory(dataPath);
-                    Log.Message($"[ToolkitCore] Created data directory: {dataPath}");
+                    ToolkitCoreLogger.Message($"Created data directory: {dataPath}");
                 }
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Failed to create data directory: {ex.Message}");
+                ToolkitCoreLogger.Error($"Failed to create data directory: {ex.Message}");
             }
         }
 
@@ -62,19 +62,19 @@ namespace ToolkitCore.Database
         {
             if (obj == null)
             {
-                Log.Error("[ToolkitCore] Cannot save null object");
+                ToolkitCoreLogger.Error("Cannot save null object");
                 return false;
             }
 
             if (string.IsNullOrEmpty(fileName))
             {
-                Log.Error("[ToolkitCore] File name cannot be null or empty");
+                ToolkitCoreLogger.Error("File name cannot be null or empty");
                 return false;
             }
 
             if (mod == null || mod.Content.Name == null)
             {
-                Log.Error("[ToolkitCore] Mod reference is null or mod has no name");
+                ToolkitCoreLogger.Error("Mod reference is null or mod has no name");
                 return false;
             }
 
@@ -88,7 +88,7 @@ namespace ToolkitCore.Database
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error saving object {fileName}: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error saving object {fileName}: {ex.Message}");
                 return false;
             }
         }
@@ -146,7 +146,7 @@ namespace ToolkitCore.Database
         {
             if (string.IsNullOrEmpty(json))
             {
-                Log.Warning("[ToolkitCore] Attempted to save empty JSON content");
+                ToolkitCoreLogger.Warning("[ToolkitCore] Attempted to save empty JSON content");
                 return false;
             }
 
@@ -158,12 +158,12 @@ namespace ToolkitCore.Database
                 EnsureDataDirectoryExists();
 
                 File.WriteAllText(fullPath, json);
-                Log.Message($"[ToolkitCore] Saved file: {fileName}");
+                ToolkitCoreLogger.Debug($"Saved file: {fileName}");
                 return true;
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error saving file {fileName}: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error saving file {fileName}: {ex.Message}");
                 return false;
             }
         }
@@ -187,7 +187,7 @@ namespace ToolkitCore.Database
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error loading file {fileName}: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error loading file {fileName}: {ex.Message}");
                 return false;
             }
         }

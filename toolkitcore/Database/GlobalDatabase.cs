@@ -36,12 +36,12 @@ namespace ToolkitCore.Database
                 if (Scribe.mode == LoadSaveMode.PostLoadInit && viewers == null)
                 {
                     viewers = new List<Viewer>();
-                    Log.Warning("[ToolkitCore] Viewer list was null after loading. Reinitializing.");
+                    ToolkitCoreLogger.Warning("Viewer list was null after loading. Reinitializing.");
                 }
             }
             catch (Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error in GlobalDatabase.ExposeData: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error in GlobalDatabase.ExposeData: {ex.Message}");
 
                 // Ensure we always have a valid viewers list
                 if (viewers == null)
@@ -53,17 +53,4 @@ namespace ToolkitCore.Database
     }
 }
 
-//using System;
-//using System.Collections.Generic;
-//using ToolkitCore.Models;
-//using Verse;
 
-//namespace ToolkitCore.Database
-//{
-//    public class GlobalDatabase : ModSettings
-//    {
-//        public List<Viewer> viewers = new List<Viewer>();
-
-//        public override void ExposeData() => Scribe_Collections.Look<Viewer>(ref viewers, "viewers", LookMode.Deep);
-//    }
-//}

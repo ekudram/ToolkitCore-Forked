@@ -24,7 +24,7 @@ namespace ToolkitCore.Models
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                ToolkitCoreLogger.Error(ex.Message);
             }
             return true;
         }

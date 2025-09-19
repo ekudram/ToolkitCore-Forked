@@ -19,7 +19,6 @@
 using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using ToolkitCore.Controllers;
 using ToolkitCore.Interfaces;
 using ToolkitCore.Windows;
@@ -45,18 +44,14 @@ namespace ToolkitCore
                     Find.WindowStack.TryRemove(((object)windowMessageLog).GetType(), true);
                     Find.WindowStack.Add((Window)windowMessageLog);
                 }, MenuOptionPriority.Low),
-                new FloatMenuOption("RemoveDuplicateViewers".Translate(), delegate ()
-                {
-                    int removedCount = ViewerController.RemoveDuplicateViewers();
-                    Messages.Message($"Removed {removedCount} duplicate viewers.", MessageTypeDefOf.TaskCompletion);
-                }, MenuOptionPriority.Low),
                 new FloatMenuOption("Help".Translate(), delegate ()
                 {
                     Application.OpenURL("https://github.com/ekudram/ToolkitCore-Forked/wiki");
                 }, MenuOptionPriority.Low),
                 new FloatMenuOption("Reconnect".Translate(), delegate ()
                 {
-                    Task.Run(() =>
+                    // Use RimWorld's LongEventHandler to offload thread-sensitive operations
+                    LongEventHandler.QueueLongEvent(delegate
                     {
                         try
                         {
@@ -73,9 +68,14 @@ namespace ToolkitCore
                         }
                         catch (Exception ex)
                         {
-                            Log.Warning($"Encountered an error while reconnecting to Twitch: {ex.Message}");
+                            ToolkitCoreLogger.Warning($"Encountered an error while reconnecting to Twitch: {ex.Message}");
+                            // Optional: Log to RimWorld's main thread if needed
+                            LongEventHandler.ExecuteWhenFinished(delegate
+                            {
+                                Log.Warning($"Twitch reconnection failed: {ex.Message}");
+                            });
                         }
-                    });
+                    }, "ToolkitCore_Reconnect", false, null);
                 }, MenuOptionPriority.Low)
             };
             return floatMenuOptionList;
