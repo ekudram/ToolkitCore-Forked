@@ -15,8 +15,10 @@
  * The base GameComponent class only has a default constructor.
  */
 
+using System.Collections.Generic;
 using ToolkitCore.Controllers;
 using ToolkitCore.Models;
+using TwitchLib.Client.Enums;
 using TwitchLib.Client.Models;
 using Verse;
 
@@ -38,42 +40,107 @@ namespace ToolkitCore.Utilities
             // Empty constructor with game parameter
         }
 
-
         /// <summary>
-        /// Parses a Twitch message to update or create viewer information
+        /// Parses a Twitch chat message to update or create viewer information
         /// </summary>
-        /// <param name="twitchCommand">The Twitch message to parse</param>
-        public override void ParseMessage(ChatMessage twitchCommand)
+        public override void ParseMessage(ChatMessage chatMessage)
         {
-            if (twitchCommand == null)
+            if (chatMessage == null)
                 return;
 
             try
             {
-                Viewer viewer = !ViewerController.ViewerExists(twitchCommand.Username)
-                    ? ViewerController.CreateViewer(twitchCommand.Username)
-                    : ViewerController.GetViewer(twitchCommand.Username);
-
-                if (viewer == null || twitchCommand.Message == null)
-                    return;
-
-                viewer.UpdateViewerFromMessage(twitchCommand);
+                UpdateViewerFromMessage(chatMessage.Username, chatMessage);
             }
             catch (System.Exception ex)
             {
-                Log.Error($"[ViewerInterface] Error parsing message: {ex.Message}");
+                Log.Error($"[ViewerInterface] Error parsing chat message: {ex.Message}");
             }
         }
-        public void UpdateViewerFromTwitchMessage(ITwitchMessage twitchMessage)
+
+        /// <summary>
+        /// Parses a Twitch whisper message to update or create viewer information
+        /// </summary>
+        public override void ParseWhisper(WhisperMessage whisperMessage)
         {
-            if (twitchMessage is ChatMessage chatMessage)
+            if (whisperMessage == null)
+                return;
+
+            try
             {
-                UpdateViewerFromMessage(chatMessage);
+                UpdateViewerFromMessage(whisperMessage.Username, whisperMessage);
             }
-            else if (twitchMessage is WhisperMessage whisperMessage)
+            catch (System.Exception ex)
             {
-                UpdateViewerFromWhisper(whisperMessage);
+                Log.Error($"[ViewerInterface] Error parsing whisper message: {ex.Message}");
             }
+        }
+
+        /// <summary>
+        /// Common method to update viewer from either chat or whisper messages
+        /// </summary>
+        private void UpdateViewerFromMessage(string username, object message)
+        {
+            if (string.IsNullOrEmpty(username))
+                return;
+
+            Viewer viewer = !ViewerController.ViewerExists(username)
+                ? ViewerController.CreateViewer(username)
+                : ViewerController.GetViewer(username);
+
+            if (viewer == null)
+                return;
+
+            // Update viewer based on message type
+            if (message is ChatMessage chatMessage)
+            {
+                viewer.UpdateViewerFromMessage(chatMessage);
+            }
+            else if (message is WhisperMessage whisperMessage)
+            {
+                // You might need to create an UpdateViewerFromWhisper method
+                // or modify UpdateViewerFromMessage to handle both types
+                viewer.UpdateViewerFromMessage(ConvertWhisperToChatMessage(whisperMessage));
+            }
+        }
+
+        /// <summary>
+        /// Converts a WhisperMessage to a ChatMessage-like object for compatibility
+        /// </summary>
+        private ChatMessage ConvertWhisperToChatMessage(WhisperMessage whisperMessage)
+        {
+            // Create a minimal ChatMessage with the essential properties
+            // This is a simplified approach - you might need to adjust based on your needs
+            return new ChatMessage(
+                botUsername: "",
+                userId: whisperMessage.UserId,
+                userName: whisperMessage.Username,
+                displayName: whisperMessage.DisplayName,
+                colorHex: "",
+                color: System.Drawing.Color.Empty,
+                emoteSet: new EmoteSet("", whisperMessage.Message), // Fixed: empty string instead of null
+                message: whisperMessage.Message,
+                userType: UserType.Viewer, // Default type
+                channel: "",
+                id: "",
+                isSubscriber: false,
+                subscribedMonthCount: 0,
+                roomId: "",
+                isTurbo: false,
+                isModerator: false,
+                isMe: false,
+                isBroadcaster: false,
+                isVip: false,
+                isPartner: false,
+                isStaff: false,
+                noisy: Noisy.False,
+                rawIrcMessage: "",
+                emoteReplacedMessage: "",
+                badges: new List<KeyValuePair<string, string>>(),
+                cheerBadge: null,
+                bits: 0,
+                bitsInDollars: 0
+            );
         }
     }
 }

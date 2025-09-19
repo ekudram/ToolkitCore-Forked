@@ -237,7 +237,17 @@ namespace ToolkitCore
             try
             {
                 if (Current.Game == null || ToolkitCoreSettings.forceWhispers)
-                    ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command);
+                    return;
+
+                // Get the ChatMessage from the ChatCommand and pass it to TryExecute
+                if (command.ChatMessage != null)
+                {
+                    ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command.ChatMessage);
+                }
+                else
+                {
+                    Log.Warning("[ToolkitCore] ChatCommand does not contain a ChatMessage reference");
+                }
             }
             catch (Exception ex)
             {
