@@ -156,20 +156,18 @@ namespace ToolkitCore
             currentY += verticalSpacing;
         }
 
-        /// <summary>
-        /// Renders a password field with show/hide functionality
-        /// </summary>
+
         /// <summary>
         /// Renders a password field with show/hide functionality
         /// </summary>
         private void RenderPasswordField(Rect fieldRect, ref string value)
         {
+            // Handle text input when shown
             if (showOauth)
             {
                 string newValue = Widgets.TextField(fieldRect, value);
                 if (newValue != value)
                 {
-                    // Ensure the token has the "oauth:" prefix
                     if (!string.IsNullOrEmpty(newValue) && !newValue.StartsWith("oauth:"))
                     {
                         newValue = "oauth:" + newValue;
@@ -179,23 +177,26 @@ namespace ToolkitCore
             }
             else
             {
+                // Display masked text when hidden
                 Widgets.Label(fieldRect, new string('*', Math.Min(value.Length, 16)));
-                if (Widgets.ButtonText(new Rect(fieldRect.x + fieldRect.width + 10f, fieldRect.y, 60f, verticalHeight), "Show".Translate(), true, true, true))
-                {
-                    showOauth = true;
-                }
+            }
+
+            // Show/hide toggle button
+            string buttonText = showOauth ? "Hide".Translate() : "Show".Translate();
+            if (Widgets.ButtonText(new Rect(fieldRect.x + fieldRect.width + 10f, fieldRect.y, 60f, verticalHeight), buttonText))
+            {
+                showOauth = !showOauth; // Toggle visibility state
             }
 
             // OAuth token helper buttons
-            if (Widgets.ButtonText(new Rect(fieldRect.x + fieldRect.width + 80f, fieldRect.y, 140f, verticalHeight), "GetAccessToken".Translate(), true, true, true))
+            if (Widgets.ButtonText(new Rect(fieldRect.x + fieldRect.width + 80f, fieldRect.y, 140f, verticalHeight), "GetAccessToken".Translate()))
             {
                 Application.OpenURL("https://twitchtokengenerator.com/");
             }
 
-            if (Widgets.ButtonText(new Rect(fieldRect.x, fieldRect.y + verticalSpacing, 200f, verticalHeight), "PasteFromClipboard".Translate(), true, true, true))
+            if (Widgets.ButtonText(new Rect(fieldRect.x, fieldRect.y + verticalSpacing, 200f, verticalHeight), "PasteFromClipboard".Translate()))
             {
                 string clipboardValue = GUIUtility.systemCopyBuffer;
-                // Ensure pasted token has the "oauth:" prefix
                 if (!string.IsNullOrEmpty(clipboardValue) && !clipboardValue.StartsWith("oauth:"))
                 {
                     clipboardValue = "oauth:" + clipboardValue;
@@ -286,7 +287,7 @@ namespace ToolkitCore
             Scribe_Values.Look(ref _sendMessageToChatOnStartup, "sendMessageToChatOnStartup", true);
             Scribe_Values.Look(ref _forceWhispers, "forceWhispers", false);
             Scribe_Values.Look(ref _enableDebugLogging, "enableDebugLogging", false);
-
+            Scribe_Values.Look(ref showOauth, "showOauth", false);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 // Ensure token has proper format after loading
