@@ -33,6 +33,7 @@ namespace ToolkitCore
         private bool _allowWhispers = true;
         private bool _forceWhispers = false;
         private bool _sendMessageToChatOnStartup = true;
+        private bool _enableDebugLogging = false;
 
         // Static fields for backward compatibility with ToolkitUtilities
         public static string channel_username = "";
@@ -42,6 +43,7 @@ namespace ToolkitCore
         public static bool allowWhispers = true;
         public static bool forceWhispers = false;
         public static bool sendMessageToChatOnStartup = true;
+        public static bool enableDebugLogging = false;
 
         private bool showOauth;
         private const float verticalHeight = 32f;
@@ -62,6 +64,7 @@ namespace ToolkitCore
             allowWhispers = _allowWhispers;
             forceWhispers = _forceWhispers;
             sendMessageToChatOnStartup = _sendMessageToChatOnStartup;
+            enableDebugLogging = _enableDebugLogging;
         }
 
         /// <summary>
@@ -125,6 +128,10 @@ namespace ToolkitCore
             // Send connection message checkbox
             RenderCheckbox(ref currentY, "SendConnectionMessage".Translate(), ref _sendMessageToChatOnStartup);
             sendMessageToChatOnStartup = _sendMessageToChatOnStartup;
+
+            // Debug logging checkbox
+            RenderCheckbox(ref currentY, "EnableDebugLogging".Translate(), ref _enableDebugLogging);
+            enableDebugLogging = _enableDebugLogging;
         }
 
         /// <summary>
@@ -278,6 +285,7 @@ namespace ToolkitCore
             Scribe_Values.Look(ref _allowWhispers, "allowWhispers", true);
             Scribe_Values.Look(ref _sendMessageToChatOnStartup, "sendMessageToChatOnStartup", true);
             Scribe_Values.Look(ref _forceWhispers, "forceWhispers", false);
+            Scribe_Values.Look(ref _enableDebugLogging, "enableDebugLogging", false);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

@@ -13,7 +13,7 @@ namespace ToolkitCore
 {
     public static class ToolkitCoreLogger
     {
-        private const string Prefix = "<color=##B1A2CA>[ToolkitCore]</color>";
+        private const string Prefix = "<color=#B1A2CA>[ToolkitCore]</color>";
 
         public static void Log(string message)
         {
@@ -42,8 +42,8 @@ namespace ToolkitCore
             Verse.Log.Message($"{Prefix} <color=#888888>[DEBUG] {message}</color>");
 #endif
 
-            // Optional: Runtime toggle for debug logging in any build
-            if (ToolkitCore.Settings?.EnableDebugLogging == true)
+            // Runtime toggle for debug logging in any build
+            if (ToolkitCoreSettings.enableDebugLogging)
                 Verse.Log.Message($"{Prefix} <color=#888888>[DEBUG] {message}</color>");
         }
     }

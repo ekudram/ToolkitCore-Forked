@@ -22,6 +22,7 @@
   <AllowViewersToWhisper>Allow Viewers to Whisper</AllowViewersToWhisper>
   <ForceViewersToWhisper>Force Viewers to Whisper</ForceViewersToWhisper>
   <SendConnectionMessage>Send Connection Message</SendConnectionMessage>
+  <EnableDebugLogging>Enable Debug Logging</EnableDebugLogging>
 
   <!-- French (Français) -->
   <Help.fr>Aide</Help.fr>
@@ -44,6 +45,7 @@
   <AllowViewersToWhisper.fr>Autoriser les messages privés</AllowViewersToWhisper.fr>
   <ForceViewersToWhisper.fr>Forcer les messages privés</ForceViewersToWhisper.fr>
   <SendConnectionMessage.fr>Envoyer un message de connexion</SendConnectionMessage.fr>
+  <EnableDebugLogging.fr>Activer la journalisation de débogage</EnableDebugLogging.fr>
 
   <!-- German (Deutsch) -->
   <Help.de>Hilfe</Help.de>
@@ -66,6 +68,7 @@
   <AllowViewersToWhisper.de>Privaten Chat erlauben</AllowViewersToWhisper.de>
   <ForceViewersToWhisper.de>Privaten Chat erzwingen</ForceViewersToWhisper.de>
   <SendConnectionMessage.de>Verbindungsnachricht senden</SendConnectionMessage.de>
+  <EnableDebugLogging.de>Debug-Protokollierung aktivieren</EnableDebugLogging.de>
 
   <!-- Irish (Gaeilge) -->
   <Help.ga>Cabhair</Help.ga>
@@ -88,6 +91,7 @@
   <AllowViewersToWhisper.ga>Ceadaigh Cogar</AllowViewersToWhisper.ga>
   <ForceViewersToWhisper.ga>Cuir Cogar i bhFeidhm</ForceViewersToWhisper.ga>
   <SendConnectionMessage.ga>Seol Teachtaireacht Nasc</SendConnectionMessage.ga>
+  <EnableDebugLogging.ga>Cumasaigh Logáil Dífhabhtaithe</EnableDebugLogging.ga>
 
   <!-- Japanese (日本語) -->
   <Help.ja>ヘルプ</Help.ja>
@@ -110,6 +114,7 @@
   <AllowViewersToWhisper.ja>視聴者のささやきを許可</AllowViewersToWhisper.ja>
   <ForceViewersToWhisper.ja>視聴者のささやきを強制</ForceViewersToWhisper.ja>
   <SendConnectionMessage.ja>接続メッセージを送信</SendConnectionMessage.ja>
+  <EnableDebugLogging.ja>デバッグログを有効にする</EnableDebugLogging.ja>
 
   <!-- Russian (Русский) -->
   <Help.ru>Помощь</Help.ru>
@@ -132,6 +137,7 @@
   <AllowViewersToWhisper.ru>Разрешить личные сообщения</AllowViewersToWhisper.ru>
   <ForceViewersToWhisper.ru>Принуждать к личным сообщениям</ForceViewersToWhisper.ru>
   <SendConnectionMessage.ru>Отправлять сообщение о подключении</SendConnectionMessage.ru>
+  <EnableDebugLogging.ru>Включить отладочное логирование</EnableDebugLogging.ru>
 
   <!-- Spanish (Español) -->
   <Help.es>Ayuda</Help.es>
@@ -154,6 +160,7 @@
   <AllowViewersToWhisper.es>Permitir Susurros</AllowViewersToWhisper.es>
   <ForceViewersToWhisper.es>Forzar Susurros</ForceViewersToWhisper.es>
   <SendConnectionMessage.es>Enviar Mensaje de Conexión</SendConnectionMessage.es>
+  <EnableDebugLogging.es>Habilitar Registro de Depuración</EnableDebugLogging.es>
 
   <!-- Scottish Gaelic (Gàidhlig) -->
   <Help.gd>Cobhair</Help.gd>
@@ -176,6 +183,7 @@
   <AllowViewersToWhisper.gd>Ceadaich Daoine a’ Cogar</AllowViewersToWhisper.gd>
   <ForceViewersToWhisper.gd>Èignich Cogar</ForceViewersToWhisper.gd>
   <SendConnectionMessage.gd>Cuir Teachdaireachd Ceangail</SendConnectionMessage.gd>
+  <EnableDebugLogging.gd>Cumasaich Logadh Deuchainn</EnableDebugLogging.gd>
 
   <!-- Welsh (Cymraeg) -->
   <Help.cy>Help</Help.cy>
@@ -198,6 +206,7 @@
   <AllowViewersToWhisper.cy>Caniatáu Sibrwd</AllowViewersToWhisper.cy>
   <ForceViewersToWhisper.cy>Gorfodi Sibrwd</ForceViewersToWhisper.cy>
   <SendConnectionMessage.cy>Anfon Neges Cyswllt</SendConnectionMessage.cy>
+  <EnableDebugLogging.cy>Galluogi Logio Dadfygio</EnableDebugLogging.cy>
 
   <!-- Chinese Simplified (简体中文) -->
   <Help.zh>帮助</Help.zh>
@@ -220,5 +229,7 @@
   <AllowViewersToWhisper.zh>允许观众私信</AllowViewersToWhisper.zh>
   <ForceViewersToWhisper.zh>强制观众私信</ForceViewersToWhisper.zh>
   <SendConnectionMessage.zh>发送连接消息</SendConnectionMessage.zh>
+  <EnableDebugLogging.zh>启用调试日志</EnableDebugLogging.zh>
+  
 
 </LanguageData>
