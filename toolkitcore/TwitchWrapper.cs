@@ -232,7 +232,7 @@ namespace ToolkitCore
 
         private void OnChatCleared(object sender, OnChatClearedArgs e)
         {
-            ToolkitCoreLogger.Message("  Chat was cleared");
+            ToolkitCoreLogger.Message("Chat was cleared");
         }
 
         private void OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
