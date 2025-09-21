@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ * File: ToolkitChatCommand.cs
+ */
+using System;
 using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 using Verse;

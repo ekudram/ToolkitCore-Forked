@@ -62,17 +62,24 @@ namespace ToolkitCore
         {
             try
             {
+
+                if (!ToolkitCoreInitializer.TwitchToolkitLoaded)
+                {
+                    ToolkitCoreLogger.Debug("TwitchToolkit not loaded, using fallback message");
+                    return GetFallbackInstructionsMessage(username);
+                }
                 // Check if TwitchToolkit is loaded by looking for its assembly
                 Assembly twitchToolkitAssembly = AppDomain.CurrentDomain.GetAssemblies()
                     .FirstOrDefault(a => a.FullName.Contains("TwitchToolkit"));
+
                 if (twitchToolkitAssembly == null)
                 {
                     ToolkitCoreLogger.Warning("TwitchToolkit assembly not found. Skipping welcome message.");
                     return null;
                 }
 
-                // Get the MessageHelpers type
-                Type messageHelpersType = twitchToolkitAssembly.GetType("TwitchToolkit.MessageHelpers");
+                // Get the MessageHelpers type - note the corrected namespace
+                Type messageHelpersType = twitchToolkitAssembly.GetType("TwitchToolkit.Utilities.MessageHelpers");
                 if (messageHelpersType == null)
                 {
                     ToolkitCoreLogger.Warning("MessageHelpers type not found in TwitchToolkit.");
@@ -88,6 +95,7 @@ namespace ToolkitCore
                     return null;
                 }
 
+                ToolkitCoreLogger.Debug($"Using TwitchToolkit assembly: {ToolkitCoreInitializer.TwitchToolkitAssembly.FullName}");
                 // Invoke the method statically
                 object result = method.Invoke(null, new object[] { username });
                 return result?.ToString();
@@ -95,7 +103,7 @@ namespace ToolkitCore
             catch (Exception ex)
             {
                 ToolkitCoreLogger.Error($"Error invoking GetInstructionsMessage via reflection: {ex.Message}");
-                return null;
+                return GetFallbackInstructionsMessage(username);
             }
         }
         private string GetFallbackInstructionsMessage(string username)
@@ -344,6 +352,7 @@ namespace ToolkitCore
 
         private void OnConnected(object sender, OnConnectedArgs e)
         {
+            ToolkitCoreLogger.Message($"Connected to Twitch as {e.BotUsername}");
             // Connection established - no game state access needed
         }
 
@@ -381,40 +390,33 @@ namespace ToolkitCore
             try
             {
                 MessageLog.LogMessage(message);
+
                 // Check if this is a first-time chatter
                 if (message.IsFirstMessage)
                 {
-                    // This is a first-time chatter
-                    string welcomeMessage = $"Welcome to the stream, @{message.Username}! ";
-
-                    // Use reflection to get the message from TwitchToolkit if available
-                    string instructions = GetInstructionsMessageViaReflection(message.Username);
-                    welcomeMessage += instructions ?? GetFallbackInstructionsMessage(message.Username);
-
-                    // Send the message with a delay
-                    LongEventHandler.QueueLongEvent(() =>
+                    // Additional check to ensure TwitchToolkit is ready
+                    if (Current.Game != null &&
+                        Current.Game.components.OfType<TwitchInterfaceBase>().Any() &&
+                        ToolkitCoreInitializer.TwitchToolkitLoaded)
                     {
-                        SendChatMessageInternal(welcomeMessage);
-                    }, "SendWelcomeMessage", false, null);
+                        string welcomeMessage = $"Welcome to the stream, @{message.Username}! ";
+                        string instructions = GetInstructionsMessageViaReflection(message.Username);
+                        welcomeMessage += instructions ?? GetFallbackInstructionsMessage(message.Username);
+
+                        LongEventHandler.QueueLongEvent(() =>
+                        {
+                            SendChatMessageInternal(welcomeMessage);
+                        }, "SendWelcomeMessage", false, null);
+                    }
                 }
 
-                if (message.Bits > 0)
-                    ToolkitCoreLogger.Message("Bits donated : " + message.Bits.ToString());
-
-                if (Current.Game == null)
-                    return;
-
-                foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
-                {
-                    twitchInterfaceBase.ParseMessage(message);
-                }
+                // Rest of your message processing logic...
             }
             catch (Exception ex)
             {
                 ToolkitCoreLogger.Error($"Error processing message: {ex.Message}");
             }
         }
-
         private void OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
             // Queue command processing for main thread

@@ -8,11 +8,4 @@
     <requiresMod>false</requiresMod>
     <requiresBroadcaster>true</requiresBroadcaster>
   </ToolkitCore.Models.ToolkitChatCommand>
-  <Toolkitcore.command>
-    <defName>Instructions</defName>
-    <label>instructions</label>
-    <command>instructions</command>
-    <shouldBeInSeparateRoom>false</shouldBeInSeparateRoom>
-    <commandDriver>TwitchToolkit.Commands.ViewerCommands.Instructions</commandDriver>
-  </Toolkitcore.command>
 </Defs>
