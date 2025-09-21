@@ -2,7 +2,7 @@
  * File: TwitchWrapper.cs
  * Project: ToolkitCore
  * 
- * Updated: [Current Date]
+ * Updated: September 20, 2025
  * 
  * Summary of Changes:
  * 1. Converted from static class to instance class to properly access instance-based settings
@@ -17,6 +17,9 @@
  * 10. Fixed ClientOptions compatibility with newer TwitchLib version
  * 11. Added proper rate limiting for message sending
  * 12. Replaced Task.Run with LongEventHandler for RimWorld compatibility
+ * 13. Added message truncation to comply with Twitch's 500-character limit
+ * 14. Added 1st-time chatter detection and welcome message
+ *  
  * 
  * Why These Changes Were Made:
  * The TwitchWrapper class was previously accessing settings through static fields,
@@ -26,10 +29,13 @@
  * for first-time users who haven't configured their Twitch credentials yet.
  * The threading fixes prevent main thread assertion errors by ensuring game state operations
  * are performed on the main thread using RimWorld's LongEventHandler.
+ * 
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using ToolkitCore.Controllers;
 using ToolkitCore.Models;
@@ -40,7 +46,10 @@ using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
 using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
+using UnityEngine;
+using UnityEngine.Assertions.Must;
 using Verse;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace ToolkitCore
 {
@@ -49,6 +58,51 @@ namespace ToolkitCore
         private readonly ToolkitCore _mod;
         private static TwitchWrapper Instance;
         private TwitchClient _client;
+        private string GetInstructionsMessageViaReflection(string username)
+        {
+            try
+            {
+                // Check if TwitchToolkit is loaded by looking for its assembly
+                Assembly twitchToolkitAssembly = AppDomain.CurrentDomain.GetAssemblies()
+                    .FirstOrDefault(a => a.FullName.Contains("TwitchToolkit"));
+                if (twitchToolkitAssembly == null)
+                {
+                    ToolkitCoreLogger.Warning("TwitchToolkit assembly not found. Skipping welcome message.");
+                    return null;
+                }
+
+                // Get the MessageHelpers type
+                Type messageHelpersType = twitchToolkitAssembly.GetType("TwitchToolkit.MessageHelpers");
+                if (messageHelpersType == null)
+                {
+                    ToolkitCoreLogger.Warning("MessageHelpers type not found in TwitchToolkit.");
+                    return null;
+                }
+
+                // Get the GetInstructionsMessage method
+                MethodInfo method = messageHelpersType.GetMethod("GetInstructionsMessage",
+                    BindingFlags.Public | BindingFlags.Static);
+                if (method == null)
+                {
+                    ToolkitCoreLogger.Warning("GetInstructionsMessage method not found.");
+                    return null;
+                }
+
+                // Invoke the method statically
+                object result = method.Invoke(null, new object[] { username });
+                return result?.ToString();
+            }
+            catch (Exception ex)
+            {
+                ToolkitCoreLogger.Error($"Error invoking GetInstructionsMessage via reflection: {ex.Message}");
+                return null;
+            }
+        }
+        private string GetFallbackInstructionsMessage(string username)
+        {
+            return $"@{username} this is a mod where you earn coins while watching. Use !instructions for more info about available commands!";
+        }
+
 
         // Public static property for backward compatibility
         public static TwitchClient Client => Instance?._client;
@@ -110,6 +164,7 @@ namespace ToolkitCore
         {
             ToolkitCoreLogger.Message($"User joined: {e.Username}");
             // Additional logic for mods to hook into
+
         }
         public static void OnUserLeft(object sender, OnUserLeftArgs e)
         {
@@ -294,6 +349,7 @@ namespace ToolkitCore
 
         private void OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
+            // todo: list.Twitch has a first time Chatter flag that could be implementied, to call this for them.Will ad to todo list
             // Use RimWorld's LongEventHandler instead of Task.Run for thread safety
             if (!ToolkitCoreSettings.sendMessageToChatOnStartup)
                 return;
@@ -325,6 +381,22 @@ namespace ToolkitCore
             try
             {
                 MessageLog.LogMessage(message);
+                // Check if this is a first-time chatter
+                if (message.IsFirstMessage)
+                {
+                    // This is a first-time chatter
+                    string welcomeMessage = $"Welcome to the stream, @{message.Username}! ";
+
+                    // Use reflection to get the message from TwitchToolkit if available
+                    string instructions = GetInstructionsMessageViaReflection(message.Username);
+                    welcomeMessage += instructions ?? GetFallbackInstructionsMessage(message.Username);
+
+                    // Send the message with a delay
+                    LongEventHandler.QueueLongEvent(() =>
+                    {
+                        SendChatMessageInternal(welcomeMessage);
+                    }, "SendWelcomeMessage", false, null);
+                }
 
                 if (message.Bits > 0)
                     ToolkitCoreLogger.Message("Bits donated : " + message.Bits.ToString());
@@ -339,7 +411,7 @@ namespace ToolkitCore
             }
             catch (Exception ex)
             {
-                ToolkitCoreLogger.Error($"  Error processing message: {ex.Message}");
+                ToolkitCoreLogger.Error($"Error processing message: {ex.Message}");
             }
         }
 
@@ -375,10 +447,18 @@ namespace ToolkitCore
             }
         }
 
+        // In TwitchWrapper.cs, in the SendChatMessageInternal method:
         public void SendChatMessageInternal(string message)
         {
             if (_client == null || string.IsNullOrEmpty(ToolkitCoreSettings.channel_username))
                 return;
+
+            // Truncate message if it exceeds Twitch's 500-character limit
+            if (message.Length > 500)
+            {
+                ToolkitCoreLogger.Warning($"Message truncated from {message.Length} to 500 characters");
+                message = message.Substring(0, 497) + "...";
+            }
 
             // Simple rate limiting
             var now = DateTime.Now;
