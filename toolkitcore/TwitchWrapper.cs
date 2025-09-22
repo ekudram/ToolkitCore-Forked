@@ -379,6 +379,7 @@ namespace ToolkitCore
         private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
             // Queue message processing for main thread
+            ToolkitCoreLogger.Debug($"Queueing message from {e.ChatMessage.Username}: {e.ChatMessage.Message}");
             LongEventHandler.QueueLongEvent(() =>
             {
                 ProcessMessageOnMainThread(e.ChatMessage);
@@ -390,6 +391,13 @@ namespace ToolkitCore
             try
             {
                 MessageLog.LogMessage(message);
+                ToolkitCoreLogger.Debug($"Processing ProcessMessageOnMainThread from {message.Username}: {message.Message}");
+                if (message.Bits > 0)
+                    Log.Message("Bits donated : " + message.Bits.ToString());
+
+                if (Current.Game == null)
+                    return; // Game not loaded, skip processing 
+
 
                 // Check if this is a first-time chatter
                 if (message.IsFirstMessage)
@@ -409,8 +417,12 @@ namespace ToolkitCore
                         }, "SendWelcomeMessage", false, null);
                     }
                 }
+                
+                foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
+                {
+                    twitchInterfaceBase.ParseMessage(message);
+                }
 
-                // Rest of your message processing logic...
             }
             catch (Exception ex)
             {
@@ -433,22 +445,27 @@ namespace ToolkitCore
                 if (Current.Game == null || ToolkitCoreSettings.forceWhispers)
                     return;
 
-                // Get the ChatMessage from the ChatCommand and pass it to TryExecute
-                if (command.ChatMessage != null)
-                {
-                    ChatCommandController.GetChatCommand(command.CommandText)?.TryExecute(command.ChatMessage);
-                }
-                else
-                {
-                    ToolkitCoreLogger.Warning("  ChatCommand does not contain a ChatMessage reference");
-                }
+                return;
+                // Duplicate processing, ignore
+                        // Process all messages through ProcessMessageOnMainThread
+                        // Doing the below causes double-processing of messages
+                        //    // Add this to also process commands through TwitchInterfaceBase
+                        //    if (command.ChatMessage != null)
+                        //    {
+                        //        foreach (var twitchInterfaceBase in Current.Game.components.OfType<TwitchInterfaceBase>().ToList())
+                        //            twitchInterfaceBase.ParseMessage(command.ChatMessage);
+                        //    }
+                        //    else
+                        //    {
+                        //        ToolkitCoreLogger.Warning("  ChatCommand does not contain a ChatMessage reference");
+                        //    }
             }
             catch (Exception ex)
             {
                 ToolkitCoreLogger.Error($"  Error processing chat command: {ex.Message}");
             }
+            
         }
-
         // In TwitchWrapper.cs, in the SendChatMessageInternal method:
         public void SendChatMessageInternal(string message)
         {
