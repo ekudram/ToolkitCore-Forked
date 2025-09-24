@@ -11,7 +11,6 @@
  * 3. Added null checks and input validation
  * 4. Enhanced error handling with detailed logging
  * 5. Added case-insensitive username comparison for Twitch compatibility
- * 6. Added duplicate prevention and cleanup functionality
  * 7. Improved exception handling with more descriptive messages
  */
 

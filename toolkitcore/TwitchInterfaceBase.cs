@@ -32,6 +32,7 @@ namespace ToolkitCore
         }
 
         public abstract void ParseMessage(ChatMessage chatMessage);
+        // public abstract void ParseMessage(TwitchMessageWrapper twitchMessageWrapper);
         // Method for handling whisper messages
         public abstract void ParseWhisper(WhisperMessage whisperMessage);
 

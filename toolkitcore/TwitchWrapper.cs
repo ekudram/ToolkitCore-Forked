@@ -172,12 +172,15 @@ namespace ToolkitCore
         {
             ToolkitCoreLogger.Message($"User joined: {e.Username}");
             // Additional logic for mods to hook into
-
         }
         public static void OnUserLeft(object sender, OnUserLeftArgs e)
         {
             ToolkitCoreLogger.Message($"User left: {e.Username}");
             // Additional logic for mods to hook into
+        }
+        private void OnUserStateChanged(object sender, OnUserStateChangedArgs e)
+        {
+            // This will allow the ViewerUpdater to receive UserState events
         }
         // Instance methods (implementation)
         public void StartAsyncInstance()
@@ -277,7 +280,7 @@ namespace ToolkitCore
                 _client.OnReSubscriber += OnReSubscriber;
                 _client.OnRaidNotification += OnRaidNotification;
                 _client.OnUserBanned += OnUserBanned;
-
+                _client.OnUserStateChanged += OnUserStateChanged;
                 //_client.OnMessageThrottled += OnMessageThrottled;
                 _client.OnChatCleared += OnChatCleared;
                 _client.OnUserJoined += OnUserJoined;
