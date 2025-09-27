@@ -3,7 +3,6 @@
  * Project: ToolkitCore
  * 
  * Updated: September 13, 2023
- * Modified Using: DeepSeek AI
  * 
  * Summary of Changes:
  * 1. Added comprehensive null checking to prevent null reference exceptions
@@ -11,6 +10,9 @@
  * 3. Maintained static property for backward compatibility
  * 4. Added thread-safe access to the viewer list
  * 5. Enhanced error handling with detailed logging
+ * 
+ * NOTE: we dont use this class except for backwards compatibility
+ * Use Viewers from TwitchToolkit instead of this class
  */
 
 using System;
