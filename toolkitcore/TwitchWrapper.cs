@@ -307,7 +307,7 @@ namespace ToolkitCore
             LongEventHandler.QueueLongEvent(() =>
             {
                 ProcessWhisperOnMainThread(e.WhisperMessage);
-            }, "ProcessTwitchWhisper", false, null);
+            }, null, false, null);
         }
 
         private void ProcessWhisperOnMainThread(WhisperMessage message)
@@ -334,7 +334,7 @@ namespace ToolkitCore
             LongEventHandler.QueueLongEvent(() =>
             {
                 ProcessWhisperCommandOnMainThread(e.Command);
-            }, "ProcessTwitchWhisperCommand", false, null);
+            }, null, false, null);
         }
 
         private void ProcessWhisperCommandOnMainThread(WhisperCommand command)
@@ -376,7 +376,7 @@ namespace ToolkitCore
                 {
                     ToolkitCoreLogger.Error($"  Error sending connection message: {ex.Message}");
                 }
-            }, "SendTwitchConnectionMessage", false, null);
+            }, null, false, null);
         }
 
         private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
@@ -386,7 +386,7 @@ namespace ToolkitCore
             LongEventHandler.QueueLongEvent(() =>
             {
                 ProcessMessageOnMainThread(e.ChatMessage);
-            }, "ProcessTwitchMessage", false, null);
+            }, null, false, null);
         }
 
         private void ProcessMessageOnMainThread(ChatMessage message)
@@ -417,7 +417,7 @@ namespace ToolkitCore
                         LongEventHandler.QueueLongEvent(() =>
                         {
                             SendChatMessageInternal(welcomeMessage);
-                        }, "SendWelcomeMessage", false, null);
+                        }, null, false, null);
                     }
                 }
                 
@@ -438,7 +438,7 @@ namespace ToolkitCore
             LongEventHandler.QueueLongEvent(() =>
             {
                 ProcessChatCommandOnMainThread(e.Command);
-            }, "ProcessTwitchCommand", false, null);
+            }, null, false, null);
         }
 
         private void ProcessChatCommandOnMainThread(ChatCommand command)

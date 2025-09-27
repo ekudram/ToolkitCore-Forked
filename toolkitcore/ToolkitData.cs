@@ -33,20 +33,20 @@ namespace ToolkitCore
                 // Ensure globalDatabase is never null
                 if (globalDatabase == null)
                 {
-                    Log.Warning("[ToolkitCore] GetSettings returned null. Creating new GlobalDatabase.");
+                    ToolkitCoreLogger.Warning("[ToolkitCore] GetSettings returned null. Creating new GlobalDatabase.");
                     globalDatabase = new GlobalDatabase();
                 }
 
                 // Ensure viewers list is never null
                 if (globalDatabase.viewers == null)
                 {
-                    Log.Warning("[ToolkitCore] Viewer list was null. Reinitializing.");
+                    ToolkitCoreLogger.Warning("[ToolkitCore] Viewer list was null. Reinitializing.");
                     globalDatabase.viewers = new List<Viewer>();
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Error($"[ToolkitCore] Error initializing ToolkitData: {ex.Message}");
+                ToolkitCoreLogger.Error($"[ToolkitCore] Error initializing ToolkitData: {ex.Message}");
 
                 // Fallback initialization
                 globalDatabase = new GlobalDatabase();

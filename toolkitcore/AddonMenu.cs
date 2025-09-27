@@ -75,7 +75,7 @@ namespace ToolkitCore
                                 ToolkitCoreLogger.Warning($"Twitch reconnection failed: {ex.Message}");
                             });
                         }
-                    }, "ToolkitCore_Reconnect", false, null);
+                    }, null, false, null);
                 }, MenuOptionPriority.Low)
             };
             return floatMenuOptionList;
