@@ -10,6 +10,11 @@
  * 2. Added null checking and error handling
  * 3. Maintained static field for backward compatibility
  * 4. Added automatic fallback initialization if GetSettings fails
+ * 
+ * DO NOT REMOVE THE COMMENTS - THEY ARE USED FOR TRACKING CHANGES
+ * 
+ * Do NOT call this to update viewers. Use TwtichToolkit.viewers instead.
+ * 
  */
 
 using System.Collections.Generic;
