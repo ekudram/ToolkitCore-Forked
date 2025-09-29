@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>Cabhair</Help>
+  <ChannelDetails>Sonraí an Chainéil</ChannelDetails>
+  <Channel>Cainéal</Channel>
+  <BotUsername>Úsáideoir Bot</BotUsername>
+  <AccessToken>Comhartha Rochtana</AccessToken>
+  <SameAsChannel>Céanna leis an gCainéal</SameAsChannel>
+  <Hide>Folaigh</Hide>
+  <Show>Taispeáin</Show>
+  <GetAccessToken>Faigh Comhartha Rochtana</GetAccessToken>
+  <PasteFromClipboard>Greamaigh ón Ghearrthaisce</PasteFromClipboard>
+  <Connection>Nasc</Connection>
+  <Status>Stádas</Status>
+  <Connected>Ceangailte</Connected>
+  <Disconnect>Dícheangail</Disconnect>
+  <NotConnected>Ní Ceangailte</NotConnected>
+  <Connect>Ceangail</Connect>
+  <AutoConnectOnStartup>Ceangail go huathoibríoch ag tosú</AutoConnectOnStartup>
+  <AllowViewersToWhisper>Ceadaigh Whispers ó Lucht Féachana</AllowViewersToWhisper>
+  <ForceViewersToWhisper>Fórsaigh Whispers ó Lucht Féachana</ForceViewersToWhisper>
+  <SendConnectionMessage>Seol Teachtaireacht Naisc</SendConnectionMessage>
+</LanguageData>

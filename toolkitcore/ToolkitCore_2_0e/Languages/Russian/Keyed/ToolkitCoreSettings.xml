@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>Помощь</Help>
+  <ChannelDetails>Детали канала</ChannelDetails>
+  <Channel>Канал</Channel>
+  <BotUsername>Имя бота</BotUsername>
+  <AccessToken>Токен доступа</AccessToken>
+  <SameAsChannel>Как канал</SameAsChannel>
+  <Hide>Скрыть</Hide>
+  <Show>Показать</Show>
+  <GetAccessToken>Получить токен доступа</GetAccessToken>
+  <PasteFromClipboard>Вставить из буфера обмена</PasteFromClipboard>
+  <Connection>Соединение</Connection>
+  <Status>Статус</Status>
+  <Connected>Подключено</Connected>
+  <Disconnect>Отключить</Disconnect>
+  <NotConnected>Не подключено</NotConnected>
+  <Connect>Подключить</Connect>
+  <AutoConnectOnStartup>Автоподключение при запуске</AutoConnectOnStartup>
+  <AllowViewersToWhisper>Разрешить шепот зрителей</AllowViewersToWhisper>
+  <ForceViewersToWhisper>Принудительный шепот зрителей</ForceViewersToWhisper>
+  <SendConnectionMessage>Отправить сообщение о подключении</SendConnectionMessage>
+</LanguageData>

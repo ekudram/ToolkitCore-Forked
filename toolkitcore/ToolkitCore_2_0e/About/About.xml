@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ModMetaData>
+  <name>Toolkit Core 2.0e</name>
+  <author>Captolamia</author>
+  <packageId>captolamia.toolkitcore</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <url>https://steamcommunity.com/sharedfiles/filedetails/?id=3576160360</url>
+  <description>
+    🌟 **Twitch Toolkit Core 2.0e - Foundation for Twitch Integration** 🌟
+
+    The essential base mod for complete Twitch integration in RimWorld 1.6. This experimental update provides the core framework that powers the entire Twitch Toolkit ecosystem.
+
+    **⚠️ COMPLETE TWITCH EXPERIENCE REQUIRES:**
+    • Twitch Toolkit 2.0e (main features)
+    • ToolkitUtils 2.0e (enhanced commands)
+
+    **Features:**
+    • Core Twitch integration framework
+    • Foundation for viewer interaction systems
+    • Compatibility with RimWorld 1.6 + All DLCs
+
+    **Report Issues:** https://github.com/ekudram/ToolkitCore-Forked/issues
+    **Documentation:** https://github.com/ekudram/ToolkitCore-Forked/wiki
+  </description>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+    <li>brrainz.harmony</li>
+  </loadAfter>
+  <incompatibleWith>
+    <li>sirrandoo.tku</li>
+    <li>hodlhodl.twitchtoolkit</li>
+    <li>hodlhodl.toolkitcore</li>
+    <li>nry.twitchtoolkit</li>
+    <li>nry.toolkitcore</li>
+    <li>sirrandoo.twitchtoolkit</li>
+  </incompatibleWith>
+</ModMetaData>

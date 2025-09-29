@@ -13,6 +13,7 @@
  * 5. Integrated translation support using keys from LanguageData.xml.
  */
 
+using RimWorld;
 using System;
 using ToolkitCore.Utilities;
 using UnityEngine;
@@ -132,6 +133,13 @@ namespace ToolkitCore
             // Debug logging checkbox
             RenderCheckbox(ref currentY, "EnableDebugLogging".Translate(), ref _enableDebugLogging);
             enableDebugLogging = _enableDebugLogging;
+
+            float saveButtonY = inRect.height - 40f;
+            if (Widgets.ButtonText(new Rect(inRect.width - 120f, saveButtonY, 100f, 30f), "Save Settings"))
+            {
+                Write();
+                Messages.Message("Toolkit Core settings saved!", MessageTypeDefOf.PositiveEvent);
+            }
         }
 
         /// <summary>
@@ -144,6 +152,8 @@ namespace ToolkitCore
 
             Rect fieldRect = new Rect(200f, currentY, fieldWidth, verticalHeight);
 
+            string originalValue = value;
+
             if (isPassword)
             {
                 RenderPasswordField(fieldRect, ref value);
@@ -151,6 +161,12 @@ namespace ToolkitCore
             else
             {
                 value = Widgets.TextField(fieldRect, value);
+            }
+
+            // If value changed, save settings
+            if (value != originalValue)
+            {
+                Write();
             }
 
             currentY += verticalSpacing;
@@ -279,6 +295,8 @@ namespace ToolkitCore
         /// </summary>
         public override void ExposeData()
         {
+            ToolkitCoreLogger.Message($"ExposeData called! Mode: {Scribe.mode}");
+
             Scribe_Values.Look(ref _channel_username, "channel_username", "");
             Scribe_Values.Look(ref _bot_username, "bot_username", "");
             Scribe_Values.Look(ref _oauth_token, "oauth_token", "");
@@ -288,6 +306,9 @@ namespace ToolkitCore
             Scribe_Values.Look(ref _forceWhispers, "forceWhispers", false);
             Scribe_Values.Look(ref _enableDebugLogging, "enableDebugLogging", false);
             Scribe_Values.Look(ref showOauth, "showOauth", false);
+
+            ToolkitCoreLogger.Message($"After loading - Channel: {_channel_username}, Bot: {_bot_username}");
+
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 // Ensure token has proper format after loading
@@ -297,6 +318,8 @@ namespace ToolkitCore
                 }
                 SyncStaticFields();
             }
+
+            ToolkitCoreLogger.Message($"=== EXPOSE DATA COMPLETED ===");
         }
 
         /// <summary>

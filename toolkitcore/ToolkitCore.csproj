@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\RimWorld\Mods\ToolkitCore\1.6\Assemblies\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\RimWorld\Mods\ToolkitCore_2_0e\1.6\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>3</WarningLevel>
@@ -94,7 +94,6 @@
     <Compile Include="Windows\Window_ModSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ContentWithTargetPath Include="About\**" CopyToOutputDirectory="PreserveNewest" TargetPath="..\About\%(Filename)%(Extension)" />
     <ContentWithTargetPath Include="Defs\**" CopyToOutputDirectory="PreserveNewest" TargetPath="..\Defs\%(RecursiveDir)%(Filename)%(Extension)" />
     <ContentWithTargetPath Include="Textures\**" CopyToOutputDirectory="PreserveNewest" TargetPath="..\Textures\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
@@ -124,6 +123,62 @@
     <Content Include="Textures\UI\Wiki\TTG_TokenPopup_1.png" />
     <Content Include="Textures\UI\Wiki\TTG_TokenPopup_2.png" />
     <Content Include="Textures\UI\Wiki\TTG_TokenPopup_3.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\Newtonsoft.Json.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\System.Buffers.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\System.Memory.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\System.Numerics.Vectors.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\ToolkitCore.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\ToolkitCore.pdb" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\TwitchLib.Api.Core.Enums.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\TwitchLib.Api.Core.Interfaces.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\TwitchLib.Client.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\TwitchLib.Client.Enums.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\TwitchLib.Client.Models.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Assemblies\TwitchLib.Communication.dll" />
+    <Content Include="ToolkitCore_2_0e\1.6\Defs\Addon.xml" />
+    <Content Include="ToolkitCore_2_0e\1.6\Defs\Commands\Commands.xml" />
+    <Content Include="ToolkitCore_2_0e\1.6\Defs\Misc\MainButtons.xml" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Icons\Hidden.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Icons\mixerIcon.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Icons\twitchIcon.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Icons\Visible.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Wiki\TTG_TokenPopup_1.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Wiki\TTG_TokenPopup_2.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Wiki\TTG_TokenPopup_3.png" />
+    <Content Include="ToolkitCore_2_0e\1.6\Textures\UI\Wiki\TTG_TokenPopup_4.png" />
+    <Content Include="ToolkitCore_2_0e\About\About.xml" />
+    <Content Include="ToolkitCore_2_0e\About\Preview.png" />
+    <Content Include="ToolkitCore_2_0e\About\PublishedFileId.txt" />
+    <Content Include="ToolkitCore_2_0e\Defs\Addon.xml" />
+    <Content Include="ToolkitCore_2_0e\Defs\Commands\Commands.xml" />
+    <Content Include="ToolkitCore_2_0e\Defs\Misc\MainButtons.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\ChineseSimplified\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\ChineseSimplified\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\English\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\English\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\French\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\French\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\German\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\German\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Irish\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Irish\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Japanese\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Japanese\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Russian\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Russian\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\ScottishGaelic\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\ScottishGaelic\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Spanish\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Spanish\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Welsh\Keyed\AddonMenu.xml" />
+    <Content Include="ToolkitCore_2_0e\Languages\Welsh\Keyed\ToolkitCoreSettings.xml" />
+    <Content Include="ToolkitCore_2_0e\Textures\UI\Icons\Hidden.png" />
+    <Content Include="ToolkitCore_2_0e\Textures\UI\Icons\mixerIcon.png" />
+    <Content Include="ToolkitCore_2_0e\Textures\UI\Icons\twitchIcon.png" />
+    <Content Include="ToolkitCore_2_0e\Textures\UI\Icons\Visible.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="About\" />
+  </ItemGroup>
 </Project>

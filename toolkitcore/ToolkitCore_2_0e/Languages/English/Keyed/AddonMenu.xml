@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- English (Source Language) -->
+  <Settings>Settings</Settings>
+  <MessageLog>Message Log</MessageLog>
+  <Help>Help</Help>
+  <Reconnect>Reconnect</Reconnect>
+  <RemoveDuplicateViewers>Remove Duplicate Viewers</RemoveDuplicateViewers>
+  <RemoveDuplicateViewersTooltip>Removes duplicate viewers from the viewer list. This can happen if a viewer connects with different names or if the same viewer connects multiple times.</RemoveDuplicateViewersTooltip>
+
+  <!-- French (Français) -->
+  <Settings.fr>Paramètres</Settings.fr>
+  <MessageLog.fr>Journal des messages</MessageLog.fr>
+  <Help.fr>Aide</Help.fr>
+  <Reconnect.fr>Reconnecter</Reconnect.fr>
+  <RemoveDuplicateViewers.fr>Supprimer les téléspectateurs en double</RemoveDuplicateViewers.fr>
+  <RemoveDuplicateViewersTooltip.fr>Supprime les téléspectateurs en double de la liste des téléspectateurs. Cela peut se produire si un téléspectateur se connecte avec des noms différents ou si le même téléspectateur se connecte plusieurs fois.</RemoveDuplicateViewersTooltip.fr>
+  
+  <!-- German (Deutsch) -->
+  <Settings.de>Einstellungen</Settings.de>
+  <MessageLog.de>Nachrichtenprotokoll</MessageLog.de>
+  <Help.de>Hilfe</Help.de>
+  <Reconnect.de>Erneut verbinden</Reconnect.de>
+  <RemoveDuplicateViewers.de>Doppelte Zuschauer entfernen</RemoveDuplicateViewers.de>
+  <RemoveDuplicateViewersTooltip.de>Entfernt doppelte Zuschauer aus der Zuschauerliste. Dies kann passieren, wenn ein Zuschauer sich mit verschiedenen Namen verbindet oder wenn derselbe Zuschauer sich mehrfach verbindet.</RemoveDuplicateViewersTooltip.de>
+  
+  <!-- Irish (Gaeilge) -->
+  <Settings.ga>Socruithe</Settings.ga>
+  <MessageLog.ga>Loga Teachtaireachtaí</MessageLog.ga>
+  <Help.ga>Cabhair</Help.ga>
+  <Reconnect.ga>Athcheangail</Reconnect.ga>
+
+  <!-- Japanese (日本語) -->
+  <Settings.ja>設定</Settings.ja>
+  <MessageLog.ja>メッセージログ</MessageLog.ja>
+  <Help.ja>ヘルプ</Help.ja>
+  <Reconnect.ja>再接続</Reconnect.ja>
+  <RemoveDuplicateViewers.ja>重複する視聴者を削除</RemoveDuplicateViewers.ja>
+  <RemoveDuplicateViewersTooltip.ja>視聴者リストから重複する視聴者を削除します。これは、視聴者が異なる名前で接続した場合や、同じ視聴者が複数回接続した場合に発生する可能性があります。</RemoveDuplicateViewersTooltip.ja>
+  
+  <!-- Italian (Italiano) -->
+  <Settings.it>Impostazioni</Settings.it>
+  <MessageLog.it>Registro messaggi</MessageLog.it>
+  <Help.it>Aiuto</Help.it>
+  <Reconnect.it>Riconnetti</Reconnect.it>
+  <RemoveDuplicateViewers.it>Rimuovi spettatori duplicati</RemoveDuplicateViewers.it>
+  <RemoveDuplicateViewersTooltip.it>Rimuove gli spettatori duplicati dall'elenco degli spettatori. Questo può accadere se uno spettatore si connette con nomi diversi o se lo stesso spettatore si connette più volte.</RemoveDuplicateViewersTooltip.it>
+  
+  <!-- Russian (Русский) -->
+  <Settings.ru>Настройки</Settings.ru>
+  <MessageLog.ru>Журнал сообщений</MessageLog.ru>
+  <Help.ru>Помощь</Help.ru>
+  <Reconnect.ru>Переподключиться</Reconnect.ru>
+  <RemoveDuplicateViewers.ru>Удалить дублирующихся зрителей</RemoveDuplicateViewers.ru>
+  <RemoveDuplicateViewersTooltip.ru>Удаляет дублирующихся зрителей из списка зрителей. Это может произойти, если зритель подключается с разными именами или если один и тот же зритель подключается несколько раз.</RemoveDuplicateViewersTooltip.ru>
+  
+  <!-- Spanish (Español) -->
+  <Settings.es>Configuración</Settings.es>
+  <MessageLog.es>Registro de mensajes</MessageLog.es>
+  <Help.es>Ayuda</Help.es>
+  <Reconnect.es>Reconectar</Reconnect.es>
+  <RemoveDuplicateViewers.es>Eliminar espectadores duplicados</RemoveDuplicateViewers.es>
+  <RemoveDuplicateViewersTooltip.es>Elimina espectadores duplicados de la lista de espectadores. Esto puede ocurrir si un espectador se conecta con diferentes nombres o si el mismo espectador se conecta varias veces.</RemoveDuplicateViewersTooltip.es>   
+  
+  <!-- Scottish Gaelic (Gàidhlig) -->
+  <Settings.gd>Roghainnean</Settings.gd>
+  <MessageLog.gd>Loga nam Teachdaireachdan</MessageLog.gd>
+  <Help.gd>Cobhair</Help.gd>
+  <Reconnect.gd>Ath-cheangail</Reconnect.gd>
+  <RemoveDuplicateViewers.gd>Thoir air falbh luchd-amhairc dùblaichte</RemoveDuplicateViewers.gd>
+  <RemoveDuplicateViewersTooltip.gd>Thoir air falbh luchd-amhairc dùblaichte bho liosta nan luchd-amhairc. Dh'fhaodadh seo tachairt ma tha neach-amhairc a' ceangal le diofar ainmnean no ma tha an aon neach-amhairc a' ceangal barrachd air aon uair.</RemoveDuplicateViewersTooltip.gd>
+  
+  <!-- Welsh (Cymraeg) -->
+  <Settings.cy>Gosodiadau</Settings.cy>
+  <MessageLog.cy>Log Negeseuon</MessageLog.cy>
+  <Help.cy>Help</Help.cy>
+  <Reconnect.cy>Ailgysylltu</Reconnect.cy>
+  <RemoveDuplicateViewers.cy></RemoveDuplicateViewers.cy>
+
+  <!-- Chinese Simplified (简体中文) -->
+  <Settings.zh>设置</Settings.zh>
+  <MessageLog.zh>消息日志</MessageLog.zh>
+  <Help.zh>帮助</Help.zh>
+  <Reconnect.zh>重新连接</Reconnect.zh>
+  <RemoveDuplicateViewers.zh>删除重复的观众</RemoveDuplicateViewers.zh>
+  <RemoveDuplicateViewersTooltip.zh>从观众列表中删除重复的观众。如果观众使用不同的名称连接，或者同一观众多次连接，可能会发生这种情况。</RemoveDuplicateViewersTooltip.zh>
+  
+</LanguageData>

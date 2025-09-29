@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>ヘルプ</Help>
+  <ChannelDetails>チャンネル詳細</ChannelDetails>
+  <Channel>チャンネル</Channel>
+  <BotUsername>ボットユーザー名</BotUsername>
+  <AccessToken>アクセストークン</AccessToken>
+  <SameAsChannel>チャンネルと同じ</SameAsChannel>
+  <Hide>非表示</Hide>
+  <Show>表示</Show>
+  <GetAccessToken>アクセストークンを取得</GetAccessToken>
+  <PasteFromClipboard>クリップボードから貼り付け</PasteFromClipboard>
+  <Connection>接続</Connection>
+  <Status>ステータス</Status>
+  <Connected>接続済み</Connected>
+  <Disconnect>切断</Disconnect>
+  <NotConnected>未接続</NotConnected>
+  <Connect>接続</Connect>
+  <AutoConnectOnStartup>起動時に自動接続</AutoConnectOnStartup>
+  <AllowViewersToWhisper>視聴者のささやきを許可</AllowViewersToWhisper>
+  <ForceViewersToWhisper>視聴者のささやきを強制</ForceViewersToWhisper>
+  <SendConnectionMessage>接続メッセージを送信</SendConnectionMessage>
+</LanguageData>

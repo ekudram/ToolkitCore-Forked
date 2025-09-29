@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- English (Source Language) -->
+  <Help>Help</Help>
+  <ChannelDetails>Channel Details</ChannelDetails>
+  <Channel>Channel</Channel>
+  <BotUsername>Bot Username</BotUsername>
+  <AccessToken>Access Token</AccessToken>
+  <SameAsChannel>Same as Channel</SameAsChannel>
+  <Hide>Hide</Hide>
+  <Show>Show</Show>
+  <GetAccessToken>Get Access Token</GetAccessToken>
+  <PasteFromClipboard>Paste from Clipboard</PasteFromClipboard>
+  <Connection>Connection</Connection>
+  <Status>Status</Status>
+  <Connected>Connected</Connected>
+  <Disconnect>Disconnect</Disconnect>
+  <NotConnected>Not Connected</NotConnected>
+  <Connect>Connect</Connect>
+  <AutoConnectOnStartup>Auto Connect on Startup</AutoConnectOnStartup>
+  <AllowViewersToWhisper>Allow Viewers to Whisper</AllowViewersToWhisper>
+  <ForceViewersToWhisper>Force Viewers to Whisper</ForceViewersToWhisper>
+  <SendConnectionMessage>Send Connection Message</SendConnectionMessage>
+  <EnableDebugLogging>Enable Debug Logging</EnableDebugLogging>
+
+  <!-- French (Français) -->
+  <Help.fr>Aide</Help.fr>
+  <ChannelDetails.fr>Détails de la chaîne</ChannelDetails.fr>
+  <Channel.fr>Chaîne</Channel.fr>
+  <BotUsername.fr>Nom du bot</BotUsername.fr>
+  <AccessToken.fr>Jeton d'accès</AccessToken.fr>
+  <SameAsChannel.fr>Identique à la chaîne</SameAsChannel.fr>
+  <Hide.fr>Masquer</Hide.fr>
+  <Show.fr>Montrer</Show.fr>
+  <GetAccessToken.fr>Obtenir un jeton</GetAccessToken.fr>
+  <PasteFromClipboard.fr>Coller depuis le presse-papiers</PasteFromClipboard.fr>
+  <Connection.fr>Connexion</Connection.fr>
+  <Status.fr>Statut</Status.fr>
+  <Connected.fr>Connecté</Connected.fr>
+  <Disconnect.fr>Déconnecter</Disconnect.fr>
+  <NotConnected.fr>Non connecté</NotConnected.fr>
+  <Connect.fr>Connecter</Connect.fr>
+  <AutoConnectOnStartup.fr>Connexion auto au démarrage</AutoConnectOnStartup.fr>
+  <AllowViewersToWhisper.fr>Autoriser les messages privés</AllowViewersToWhisper.fr>
+  <ForceViewersToWhisper.fr>Forcer les messages privés</ForceViewersToWhisper.fr>
+  <SendConnectionMessage.fr>Envoyer un message de connexion</SendConnectionMessage.fr>
+  <EnableDebugLogging.fr>Activer la journalisation de débogage</EnableDebugLogging.fr>
+
+  <!-- German (Deutsch) -->
+  <Help.de>Hilfe</Help.de>
+  <ChannelDetails.de>Kanal-Details</ChannelDetails.de>
+  <Channel.de>Kanal</Channel.de>
+  <BotUsername.de>Bot-Benutzername</BotUsername.de>
+  <AccessToken.de>Zugriffstoken</AccessToken.de>
+  <SameAsChannel.de>Gleich wie Kanal</SameAsChannel.de>
+  <Hide.de>Verbergen</Hide.de>
+  <Show.de>Zeigen</Show.de>
+  <GetAccessToken.de>Token holen</GetAccessToken.de>
+  <PasteFromClipboard.de>Aus Zwischenablage einfügen</PasteFromClipboard.de>
+  <Connection.de>Verbindung</Connection.de>
+  <Status.de>Status</Status.de>
+  <Connected.de>Verbunden</Connected.de>
+  <Disconnect.de>Trennen</Disconnect.de>
+  <NotConnected.de>Nicht verbunden</NotConnected.de>
+  <Connect.de>Verbinden</Connect.de>
+  <AutoConnectOnStartup.de>Auto-verbinden beim Start</AutoConnectOnStartup.de>
+  <AllowViewersToWhisper.de>Privaten Chat erlauben</AllowViewersToWhisper.de>
+  <ForceViewersToWhisper.de>Privaten Chat erzwingen</ForceViewersToWhisper.de>
+  <SendConnectionMessage.de>Verbindungsnachricht senden</SendConnectionMessage.de>
+  <EnableDebugLogging.de>Debug-Protokollierung aktivieren</EnableDebugLogging.de>
+
+  <!-- Irish (Gaeilge) -->
+  <Help.ga>Cabhair</Help.ga>
+  <ChannelDetails.ga>Sonraí an Chainéil</ChannelDetails.ga>
+  <Channel.ga>Cainéal</Channel.ga>
+  <BotUsername.ga>Ainm Úsáideora an Bot</BotUsername.ga>
+  <AccessToken.ga>Comhartha Rochtana</AccessToken.ga>
+  <SameAsChannel.ga>Mar an gCainéal</SameAsChannel.ga>
+  <Hide.ga>Folaigh</Hide.ga>
+  <Show.ga>Taispeáin</Show.ga>
+  <GetAccessToken.ga>Faigh Comhartha</GetAccessToken.ga>
+  <PasteFromClipboard.ga>Greamaigh ón nGearrchlár</PasteFromClipboard.ga>
+  <Connection.ga>Nasc</Connection.ga>
+  <Status.ga>Stádas</Status.ga>
+  <Connected.ga>Nasctha</Connected.ga>
+  <Disconnect.ga>Dínasc</Disconnect.ga>
+  <NotConnected.ga>Gan Nasc</NotConnected.ga>
+  <Connect.ga>Nasc</Connect.ga>
+  <AutoConnectOnStartup.ga>Uathnasc ar Thosú</AutoConnectOnStartup.ga>
+  <AllowViewersToWhisper.ga>Ceadaigh Cogar</AllowViewersToWhisper.ga>
+  <ForceViewersToWhisper.ga>Cuir Cogar i bhFeidhm</ForceViewersToWhisper.ga>
+  <SendConnectionMessage.ga>Seol Teachtaireacht Nasc</SendConnectionMessage.ga>
+  <EnableDebugLogging.ga>Cumasaigh Logáil Dífhabhtaithe</EnableDebugLogging.ga>
+
+  <!-- Japanese (日本語) -->
+  <Help.ja>ヘルプ</Help.ja>
+  <ChannelDetails.ja>チャンネル詳細</ChannelDetails.ja>
+  <Channel.ja>チャンネル</Channel.ja>
+  <BotUsername.ja>Botのユーザー名</BotUsername.ja>
+  <AccessToken.ja>アクセストークン</AccessToken.ja>
+  <SameAsChannel.ja>チャンネルと同じ</SameAsChannel.ja>
+  <Hide.ja>非表示</Hide.ja>
+  <Show.ja>表示</Show.ja>
+  <GetAccessToken.ja>トークンを取得</GetAccessToken.ja>
+  <PasteFromClipboard.ja>クリップボードから貼り付け</PasteFromClipboard.ja>
+  <Connection.ja>接続</Connection.ja>
+  <Status.ja>状態</Status.ja>
+  <Connected.ja>接続済み</Connected.ja>
+  <Disconnect.ja>切断</Disconnect.ja>
+  <NotConnected.ja>未接続</NotConnected.ja>
+  <Connect.ja>接続</Connect.ja>
+  <AutoConnectOnStartup.ja>起動時に自動接続</AutoConnectOnStartup.ja>
+  <AllowViewersToWhisper.ja>視聴者のささやきを許可</AllowViewersToWhisper.ja>
+  <ForceViewersToWhisper.ja>視聴者のささやきを強制</ForceViewersToWhisper.ja>
+  <SendConnectionMessage.ja>接続メッセージを送信</SendConnectionMessage.ja>
+  <EnableDebugLogging.ja>デバッグログを有効にする</EnableDebugLogging.ja>
+
+  <!-- Russian (Русский) -->
+  <Help.ru>Помощь</Help.ru>
+  <ChannelDetails.ru>Детали канала</ChannelDetails.ru>
+  <Channel.ru>Канал</Channel.ru>
+  <BotUsername.ru>Имя бота</BotUsername.ru>
+  <AccessToken.ru>Токен доступа</AccessToken.ru>
+  <SameAsChannel.ru>Как у канала</SameAsChannel.ru>
+  <Hide.ru>Скрыть</Hide.ru>
+  <Show.ru>Показать</Show.ru>
+  <GetAccessToken.ru>Получить токен</GetAccessToken.ru>
+  <PasteFromClipboard.ru>Вставить из буфера</PasteFromClipboard.ru>
+  <Connection.ru>Подключение</Connection.ru>
+  <Status.ru>Статус</Status.ru>
+  <Connected.ru>Подключено</Connected.ru>
+  <Disconnect.ru>Отключить</Disconnect.ru>
+  <NotConnected.ru>Не подключено</NotConnected.ru>
+  <Connect.ru>Подключить</Connect.ru>
+  <AutoConnectOnStartup.ru>Автоподключение при запуске</AutoConnectOnStartup.ru>
+  <AllowViewersToWhisper.ru>Разрешить личные сообщения</AllowViewersToWhisper.ru>
+  <ForceViewersToWhisper.ru>Принуждать к личным сообщениям</ForceViewersToWhisper.ru>
+  <SendConnectionMessage.ru>Отправлять сообщение о подключении</SendConnectionMessage.ru>
+  <EnableDebugLogging.ru>Включить отладочное логирование</EnableDebugLogging.ru>
+
+  <!-- Spanish (Español) -->
+  <Help.es>Ayuda</Help.es>
+  <ChannelDetails.es>Detalles del Canal</ChannelDetails.es>
+  <Channel.es>Canal</Channel.es>
+  <BotUsername.es>Usuario del Bot</BotUsername.es>
+  <AccessToken.es>Token de Acceso</AccessToken.es>
+  <SameAsChannel.es>Igual que el Canal</SameAsChannel.es>
+  <Hide.es>Ocultar</Hide.es>
+  <Show.es>Mostrar</Show.es>
+  <GetAccessToken.es>Obtener Token</GetAccessToken.es>
+  <PasteFromClipboard.es>Pegar desde el Portapapeles</PasteFromClipboard.es>
+  <Connection.es>Conexión</Connection.es>
+  <Status.es>Estado</Status.es>
+  <Connected.es>Conectado</Connected.es>
+  <Disconnect.es>Desconectar</Disconnect.es>
+  <NotConnected.es>No Conectado</NotConnected.es>
+  <Connect.es>Conectar</Connect.es>
+  <AutoConnectOnStartup.es>Conectar al Inicio</AutoConnectOnStartup.es>
+  <AllowViewersToWhisper.es>Permitir Susurros</AllowViewersToWhisper.es>
+  <ForceViewersToWhisper.es>Forzar Susurros</ForceViewersToWhisper.es>
+  <SendConnectionMessage.es>Enviar Mensaje de Conexión</SendConnectionMessage.es>
+  <EnableDebugLogging.es>Habilitar Registro de Depuración</EnableDebugLogging.es>
+
+  <!-- Scottish Gaelic (Gàidhlig) -->
+  <Help.gd>Cobhair</Help.gd>
+  <ChannelDetails.gd>Mion-fhiosrachd an t-Sianail</ChannelDetails.gd>
+  <Channel.gd>Sianal</Channel.gd>
+  <BotUsername.gd>Ainm-cleachdaidh a’ Bot</BotUsername.gd>
+  <AccessToken.gd>Comharra-ruigsinneachd</AccessToken.gd>
+  <SameAsChannel.gd>Coltach ris an t-Sianal</SameAsChannel.gd>
+  <Hide.gd>Falaich</Hide.gd>
+  <Show.gd>Seall</Show.gd>
+  <GetAccessToken.gd>Faigh Comharra</GetAccessToken.gd>
+  <PasteFromClipboard.gd>Cuir bhon bhòrd-gearraidh</PasteFromClipboard.gd>
+  <Connection.gd>Ceangal</Connection.gd>
+  <Status.gd>Inbhe</Status.gd>
+  <Connected.gd>Ceangailte</Connected.gd>
+  <Disconnect.gd>Bris an Ceangal</Disconnect.gd>
+  <NotConnected.gd>Gun Cheangal</NotConnected.gd>
+  <Connect.gd>Ceangail</Connect.gd>
+  <AutoConnectOnStartup.gd>Ceangail gu fèin-ghluasadach</AutoConnectOnStartup.gd>
+  <AllowViewersToWhisper.gd>Ceadaich Daoine a’ Cogar</AllowViewersToWhisper.gd>
+  <ForceViewersToWhisper.gd>Èignich Cogar</ForceViewersToWhisper.gd>
+  <SendConnectionMessage.gd>Cuir Teachdaireachd Ceangail</SendConnectionMessage.gd>
+  <EnableDebugLogging.gd>Cumasaich Logadh Deuchainn</EnableDebugLogging.gd>
+
+  <!-- Welsh (Cymraeg) -->
+  <Help.cy>Help</Help.cy>
+  <ChannelDetails.cy>Manylion y Sianel</ChannelDetails.cy>
+  <Channel.cy>Sianel</Channel.cy>
+  <BotUsername.cy>Enw Defnyddiwr y Bot</BotUsername.cy>
+  <AccessToken.cy>Tocyn Mynediad</AccessToken.cy>
+  <SameAsChannel.cy>Yr un â'r Sianel</SameAsChannel.cy>
+  <Hide.cy>Cuddio</Hide.cy>
+  <Show.cy>Dangos</Show.cy>
+  <GetAccessToken.cy>Cael Tocyn</GetAccessToken.cy>
+  <PasteFromClipboard.cy>Gludo o'r clipfwrdd</PasteFromClipboard.cy>
+  <Connection.cy>Cyswllt</Connection.cy>
+  <Status.cy>Statws</Status.cy>
+  <Connected.cy>Wedi cysylltu</Connected.cy>
+  <Disconnect.cy>Datgysylltu</Disconnect.cy>
+  <NotConnected.cy>Heb gysylltu</NotConnected.cy>
+  <Connect.cy>Cysylltu</Connect.cy>
+  <AutoConnectOnStartup.cy>Auto-gysylltu ar Gychwyn</AutoConnectOnStartup.cy>
+  <AllowViewersToWhisper.cy>Caniatáu Sibrwd</AllowViewersToWhisper.cy>
+  <ForceViewersToWhisper.cy>Gorfodi Sibrwd</ForceViewersToWhisper.cy>
+  <SendConnectionMessage.cy>Anfon Neges Cyswllt</SendConnectionMessage.cy>
+  <EnableDebugLogging.cy>Galluogi Logio Dadfygio</EnableDebugLogging.cy>
+
+  <!-- Chinese Simplified (简体中文) -->
+  <Help.zh>帮助</Help.zh>
+  <ChannelDetails.zh>频道详情</ChannelDetails.zh>
+  <Channel.zh>频道</Channel.zh>
+  <BotUsername.zh>机器人用户名</BotUsername.zh>
+  <AccessToken.zh>访问令牌</AccessToken.zh>
+  <SameAsChannel.zh>与频道相同</SameAsChannel.zh>
+  <Hide.zh>隐藏</Hide.zh>
+  <Show.zh>显示</Show.zh>
+  <GetAccessToken.zh>获取访问令牌</GetAccessToken.zh>
+  <PasteFromClipboard.zh>从剪贴板粘贴</PasteFromClipboard.zh>
+  <Connection.zh>连接</Connection.zh>
+  <Status.zh>状态</Status.zh>
+  <Connected.zh>已连接</Connected.zh>
+  <Disconnect.zh>断开连接</Disconnect.zh>
+  <NotConnected.zh>未连接</NotConnected.zh>
+  <Connect.zh>连接</Connect.zh>
+  <AutoConnectOnStartup.zh>启动时自动连接</AutoConnectOnStartup.zh>
+  <AllowViewersToWhisper.zh>允许观众私信</AllowViewersToWhisper.zh>
+  <ForceViewersToWhisper.zh>强制观众私信</ForceViewersToWhisper.zh>
+  <SendConnectionMessage.zh>发送连接消息</SendConnectionMessage.zh>
+  <EnableDebugLogging.zh>启用调试日志</EnableDebugLogging.zh>
+  
+
+</LanguageData>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>帮助</Help>
+  <ChannelDetails>频道详情</ChannelDetails>
+  <Channel>频道</Channel>
+  <BotUsername>机器人用户名</BotUsername>
+  <AccessToken>访问令牌</AccessToken>
+  <SameAsChannel>与频道相同</SameAsChannel>
+  <Hide>隐藏</Hide>
+  <Show>显示</Show>
+  <GetAccessToken>获取访问令牌</GetAccessToken>
+  <PasteFromClipboard>从剪贴板粘贴</PasteFromClipboard>
+  <Connection>连接</Connection>
+  <Status>状态</Status>
+  <Connected>已连接</Connected>
+  <Disconnect>断开连接</Disconnect>
+  <NotConnected>未连接</NotConnected>
+  <Connect>连接</Connect>
+  <AutoConnectOnStartup>启动时自动连接</AutoConnectOnStartup>
+  <AllowViewersToWhisper>允许观众私信</AllowViewersToWhisper>
+  <ForceViewersToWhisper>强制观众私信</ForceViewersToWhisper>
+  <SendConnectionMessage>发送连接消息</SendConnectionMessage>
+</LanguageData>

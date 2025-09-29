@@ -39,10 +39,6 @@ namespace ToolkitCore
             // Initialize the Settings property first
             Settings = GetSettings<ToolkitCoreSettings>();
 
-            // Set the mod instance in settings
-            Settings.SetMod(this);
-
-            // Then set the static field for backward compatibility
             ToolkitCore.settings = Settings;
 
             _twitchWrapper = new TwitchWrapper(this);
@@ -51,7 +47,7 @@ namespace ToolkitCore
 
         public TwitchWrapper TwitchWrapper => _twitchWrapper;
 
-        public override string SettingsCategory() => "Toolkit Core";
+        public override string SettingsCategory() => "Toolkit Core 2.0e";
 
         public override void DoSettingsWindowContents(Rect inRect) =>
             Settings.DoWindowContents(inRect);
@@ -60,6 +56,10 @@ namespace ToolkitCore
         {
             if (Settings == null)
                 return;
+            Settings.SetMod(this);
+
+            // Force save to create the settings file with current values
+            Settings.Write();
 
             if (Settings.canConnectOnStartup())
             {
@@ -72,6 +72,11 @@ namespace ToolkitCore
                     ToolkitCoreLogger.Warning($"Failed to connect to Twitch on startup: {ex.Message}");
                 }
             }
+        }
+        public void OnSettingsChanged()
+        {
+            Settings.Write();
+            
         }
     }
 }

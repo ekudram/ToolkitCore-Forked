@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>Cobhair</Help>
+  <ChannelDetails>Mion-fhiosrachadh an t-Seanail</ChannelDetails>
+  <Channel>Seanail</Channel>
+  <BotUsername>Ainm-cleachdaiche Bot</BotUsername>
+  <AccessToken>Tocan Inntrigidh</AccessToken>
+  <SameAsChannel>Mar an Seanail</SameAsChannel>
+  <Hide>Falaich</Hide>
+  <Show>Seall</Show>
+  <GetAccessToken>Faigh Tocan Inntrigidh</GetAccessToken>
+  <PasteFromClipboard>Paste bho Clipboard</PasteFromClipboard>
+  <Connection>Ceangal</Connection>
+  <Status>Inbhe</Status>
+  <Connected>Ceangailte</Connected>
+  <Disconnect>Dì-cheangail</Disconnect>
+  <NotConnected>Gun cheangal</NotConnected>
+  <Connect>Ceangail</Connect>
+  <AutoConnectOnStartup>Ceangail gu fèin-obrachail aig tòiseachadh</AutoConnectOnStartup>
+  <AllowViewersToWhisper>Ceadaich Whispers bho Luchd-amhairc</AllowViewersToWhisper>
+  <ForceViewersToWhisper>Èigneachadh Whispers bho Luchd-amhairc</ForceViewersToWhisper>
+  <SendConnectionMessage>Cuir Teachdaireachd Ceangail</SendConnectionMessage>
+</LanguageData>

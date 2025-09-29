@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>Ayuda</Help>
+  <ChannelDetails>Detalles del canal</ChannelDetails>
+  <Channel>Canal</Channel>
+  <BotUsername>Nombre de usuario del bot</BotUsername>
+  <AccessToken>Token de acceso</AccessToken>
+  <SameAsChannel>Igual que el canal</SameAsChannel>
+  <Hide>Ocultar</Hide>
+  <Show>Mostrar</Show>
+  <GetAccessToken>Obtener token de acceso</GetAccessToken>
+  <PasteFromClipboard>Pegar desde el portapapeles</PasteFromClipboard>
+  <Connection>Conexión</Connection>
+  <Status>Estado</Status>
+  <Connected>Conectado</Connected>
+  <Disconnect>Desconectar</Disconnect>
+  <NotConnected>No conectado</NotConnected>
+  <Connect>Conectar</Connect>
+  <AutoConnectOnStartup>Conectar automáticamente al iniciar</AutoConnectOnStartup>
+  <AllowViewersToWhisper>Permitir susurros de espectadores</AllowViewersToWhisper>
+  <ForceViewersToWhisper>Forzar susurros de espectadores</ForceViewersToWhisper>
+  <SendConnectionMessage>Enviar mensaje de conexión</SendConnectionMessage>
+</LanguageData>

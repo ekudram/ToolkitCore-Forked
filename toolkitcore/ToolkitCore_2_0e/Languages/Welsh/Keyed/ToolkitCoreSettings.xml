@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Help>Cymorth</Help>
+  <ChannelDetails>Manylion y Sianel</ChannelDetails>
+  <Channel>Sianel</Channel>
+  <BotUsername>Enw Defnyddiwr Bot</BotUsername>
+  <AccessToken>Tocyn Mynediad</AccessToken>
+  <SameAsChannel>Yr un fath â'r Sianel</SameAsChannel>
+  <Hide>Cuddio</Hide>
+  <Show>Dangos</Show>
+  <GetAccessToken>Cael Tocyn Mynediad</GetAccessToken>
+  <PasteFromClipboard>Gludo o'r Clipfwrdd</PasteFromClipboard>
+  <Connection>Cysylltiad</Connection>
+  <Status>Statws</Status>
+  <Connected>Wedi'i Gysylltu</Connected>
+  <Disconnect>Datgysylltu</Disconnect>
+  <NotConnected>Heb Gysylltu</NotConnected>
+  <Connect>Cysylltu</Connect>
+  <AutoConnectOnStartup>Cysylltu'n Awtomatig wrth gychwyn</AutoConnectOnStartup>
+  <AllowViewersToWhisper>Caniatáu Chwibanu i Wylwyr</AllowViewersToWhisper>
+  <ForceViewersToWhisper>Gorfodi Chwibanu i Wylwyr</ForceViewersToWhisper>
+  <SendConnectionMessage>Anfon Neges Cysylltiad</SendConnectionMessage>
+</LanguageData>
