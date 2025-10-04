@@ -295,7 +295,7 @@ namespace ToolkitCore
         /// </summary>
         public override void ExposeData()
         {
-            ToolkitCoreLogger.Message($"ExposeData called! Mode: {Scribe.mode}");
+            ToolkitCoreLogger.Debug($"ExposeData called! Mode: {Scribe.mode}");
 
             Scribe_Values.Look(ref _channel_username, "channel_username", "");
             Scribe_Values.Look(ref _bot_username, "bot_username", "");
@@ -319,7 +319,7 @@ namespace ToolkitCore
                 SyncStaticFields();
             }
 
-            ToolkitCoreLogger.Message($"=== EXPOSE DATA COMPLETED ===");
+            ToolkitCoreLogger.Debug($"=== EXPOSE DATA COMPLETED ===");
         }
 
         /// <summary>

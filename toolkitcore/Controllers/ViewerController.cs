@@ -2,9 +2,6 @@
  * File: ViewerController.cs
  * Project: ToolkitCore
  * 
- * Updated: [Current Date]
- * Modified Using: DeepSeek AI
- * 
  * Summary of Changes:
  * 1. Added comprehensive documentation header
  * 2. Maintained static methods for backward compatibility
@@ -12,13 +9,27 @@
  * 4. Enhanced error handling with detailed logging
  * 5. Added case-insensitive username comparison for Twitch compatibility
  * 7. Improved exception handling with more descriptive messages
+ * 
+/*
+ * COMMUNITY PRESERVATION NOTICE
+ * 
+ * Based on: ToolkitCore (https://github.com/harleyknd1/ToolkitCore)
+ * License: MIT - Added by SirRandoo on October 4, 2025
+ * Original Source: https://github.com/hodlhodl1132/ToolkitCore (abandoned)
+ * 
+ * MAJOR MODIFICATIONS © 2025 Captolamia:
+ * - Complete rewrite of event handlers for TwitchLib 3.1.4 → 3.4.0
+ * - Obsoleted deprecated interfaces and methods  
+ * - Updated to modern C# patterns and practices
+ * 
+ * This file contains substantial original work representing a major
+ * derivative work. Modifications offered under GNU GPL v3.
+ * 
+ * Community maintainers have approved continued development.
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using ToolkitCore.Models;
-using Verse;
 
 namespace ToolkitCore.Controllers
 {

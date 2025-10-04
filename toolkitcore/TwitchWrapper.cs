@@ -30,26 +30,36 @@
  * The threading fixes prevent main thread assertion errors by ensuring game state operations
  * are performed on the main thread using RimWorld's LongEventHandler.
  * 
+ /*
+ * COMMUNITY PRESERVATION NOTICE
+ * 
+ * Based on: ToolkitCore (https://github.com/harleyknd1/ToolkitCore)
+ * License: MIT - Added by SirRandoo on October 4, 2025
+ * Original Source: https://github.com/hodlhodl1132/ToolkitCore (abandoned)
+ * 
+ * MAJOR MODIFICATIONS © 2025 Captolamia:
+ * - Complete rewrite of event handlers for TwitchLib 3.1.4 → 3.4.0
+ * - Obsoleted deprecated interfaces and methods  
+ * - Updated to modern C# patterns and practices
+ * 
+ * This file contains substantial original work representing a major
+ * derivative work. Modifications offered under GNU GPL v3.
+ * 
+ * Community maintainers have approved continued development.
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using ToolkitCore.Controllers;
 using ToolkitCore.Models;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
-using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
-using UnityEngine;
-using UnityEngine.Assertions.Must;
 using Verse;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace ToolkitCore
 {
